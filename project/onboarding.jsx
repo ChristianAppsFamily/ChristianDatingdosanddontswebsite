@@ -179,6 +179,8 @@ function SignupPage({ onComplete, onNav, mode = 'signup' }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [plan, setPlan] = useState('annual');
+  const [googleLoading, setGoogleLoading] = useState(false);
+  const [googleError, setGoogleError] = useState(null);
   const isSignup = mode === 'signup';
 
   const submit = (e) => {
@@ -190,6 +192,22 @@ function SignupPage({ onComplete, onNav, mode = 'signup' }) {
       password,
       plan,
     });
+  };
+
+  const handleGoogleAuth = async () => {
+    if (!isSupabaseConfigured()) {
+      setGoogleError('Something went wrong. Please try again.');
+      return;
+    }
+    setGoogleError(null);
+    setGoogleLoading(true);
+    try {
+      await signInWithGoogle();
+    } catch (e) {
+      console.error('Google auth error:', e);
+      setGoogleError('Something went wrong. Please try again.');
+      setGoogleLoading(false);
+    }
   };
 
   return (
@@ -228,6 +246,58 @@ function SignupPage({ onComplete, onNav, mode = 'signup' }) {
             </p>
 
             <div style={{ height: 8 }} />
+
+            <button
+              type="button"
+              disabled={googleLoading}
+              onClick={handleGoogleAuth}
+              style={{
+                display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                gap: 10, width: '100%', height: 48,
+                background: 'var(--white)',
+                border: '1.5px solid var(--line)',
+                borderRadius: 'var(--r-pill)',
+                fontFamily: 'var(--sans)', fontSize: 15, fontWeight: 600,
+                color: 'var(--ink)', cursor: googleLoading ? 'not-allowed' : 'pointer',
+                opacity: googleLoading ? 0.7 : 1,
+                transition: 'all 160ms ease',
+                WebkitTapHighlightColor: 'transparent',
+              }}
+              onMouseEnter={e => {
+                if (googleLoading) return;
+                e.currentTarget.style.borderColor = 'var(--orange)';
+                e.currentTarget.style.background = 'var(--cream)';
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.borderColor = 'var(--line)';
+                e.currentTarget.style.background = 'var(--white)';
+                e.currentTarget.style.transform = 'scale(1)';
+              }}
+              onMouseDown={e => { if (!googleLoading) e.currentTarget.style.transform = 'scale(0.97)'; }}
+              onMouseUp={e => { e.currentTarget.style.transform = 'scale(1)'; }}
+            >
+              <svg width="18" height="18" viewBox="0 0 18 18" style={{ flexShrink: 0 }} aria-hidden="true">
+                <path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615z"/>
+                <path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z"/>
+                <path fill="#FBBC05" d="M3.964 10.707A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.707V4.961H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.039l3.007-2.332z"/>
+                <path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.961L3.964 7.293C4.672 5.166 6.656 3.58 9 3.58z"/>
+              </svg>
+              {googleLoading ? 'Redirecting to Google...' : 'Continue with Google'}
+            </button>
+            {googleError && (
+              <p style={{ margin: '-8px 0 0', fontSize: 13, color: 'var(--orange)' }}>Something went wrong. Try again.</p>
+            )}
+
+            <div style={{
+              display: 'flex', alignItems: 'center', gap: 12,
+              margin: '20px 0',
+            }}>
+              <div style={{ flex: 1, height: 1, background: 'var(--line)' }} />
+              <span style={{ fontSize: 13, color: 'var(--ink-mute)', whiteSpace: 'nowrap' }}>
+                or continue with email
+              </span>
+              <div style={{ flex: 1, height: 1, background: 'var(--line)' }} />
+            </div>
 
             {isSignup && (
               <>

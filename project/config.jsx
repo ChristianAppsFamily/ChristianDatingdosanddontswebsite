@@ -119,6 +119,64 @@ async function signOutUser() {
   try { await sb.auth.signOut(); } catch (e) { console.error('[auth] signOut', e); }
 }
 
+/* Google OAuth — redirect target must match Supabase Auth redirect allow-list. */
+function getOAuthRedirectUrl() {
+  return window.location.origin + '/auth/callback';
+}
+
+async function signInWithGoogle() {
+  if (!sb) throw new Error('Supabase not configured');
+  const { error } = await sb.auth.signInWithOAuth({
+    provider: 'google',
+    options: { redirectTo: getOAuthRedirectUrl() },
+  });
+  if (error) throw error;
+}
+
+/* Insert-only upsert for Google users — never overwrite stage/plan on return visits. */
+async function upsertGoogleUser(user) {
+  if (!sb || !user?.id) return;
+  const md = user.user_metadata || {};
+  const name = md.full_name || md.name || user.email?.split('@')[0] || 'You';
+  const { error } = await sb.from('users').upsert(
+    { id: user.id, email: user.email, name },
+    { onConflict: 'id', ignoreDuplicates: true },
+  );
+  if (error) console.error('[auth] upsertGoogleUser', error);
+}
+
+/* True when URL carries OAuth tokens or our post-callback screen param. */
+function isOAuthCallbackUrl() {
+  const hash = window.location.hash || '';
+  const params = new URLSearchParams(window.location.search);
+  return (
+    hash.includes('access_token') ||
+    hash.includes('refresh_token') ||
+    params.has('code') ||
+    params.get('oauth') === '1'
+  );
+}
+
+/* Exchange OAuth redirect for a session; upsert profile row. Returns routing hint. */
+async function handleOAuthCallback() {
+  if (!sb) return null;
+  const { data: { session }, error } = await sb.auth.getSession();
+  if (error || !session?.user) return null;
+  const authUser = session.user;
+  await upsertGoogleUser(authUser);
+  const row = await fetchUserRow(authUser.id);
+  return {
+    user: authUser,
+    row,
+    profile: profileFromRow(row, authUser),
+    hasStage: !!row?.stage,
+  };
+}
+
+function clearOAuthUrlParams() {
+  window.history.replaceState({}, '', window.location.pathname);
+}
+
 /* Persist onboarding/profile changes (stage, plan, etc.) on the user row. */
 async function updateUserRow(userId, patch) {
   if (!sb || !userId) return null;
@@ -202,6 +260,12 @@ Object.assign(window, {
   signUpUser,
   signInUser,
   signOutUser,
+  getOAuthRedirectUrl,
+  signInWithGoogle,
+  upsertGoogleUser,
+  isOAuthCallbackUrl,
+  handleOAuthCallback,
+  clearOAuthUrlParams,
   updateUserRow,
   loadCurrentProfile,
   startCheckout,

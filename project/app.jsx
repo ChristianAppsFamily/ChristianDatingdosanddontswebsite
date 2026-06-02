@@ -52,6 +52,33 @@ function App() {
     let active = true;
 
     (async () => {
+      // Google OAuth return — tokens in hash, ?code=, or redirect from /auth/callback
+      if (isOAuthCallbackUrl()) {
+        const params = new URLSearchParams(window.location.search);
+        const oauthResult = await handleOAuthCallback();
+        if (oauthResult && active) {
+          const { profile, user: authUser, hasStage } = oauthResult;
+          const md = authUser.user_metadata || {};
+          setSignupInfo({
+            name: profile?.name || md.full_name || authUser.email?.split('@')[0] || 'You',
+            city: profile?.city || 'somewhere',
+            email: authUser.email || '',
+            plan: profile?.plan || 'annual',
+          });
+          if (profile) {
+            setUser(profile);
+            const m = profile.is_premium ? 'premium' : 'expired';
+            setTrialMode(m); setTweak('trialMode', m);
+          }
+          await reloadPosts(profile?.id || null);
+          const nextScreen = params.get('screen') || (hasStage ? 'dashboard' : 'onboarding');
+          setScreen(nextScreen);
+          setTweak('startScreen', nextScreen);
+          clearOAuthUrlParams();
+          return;
+        }
+      }
+
       const profile = await loadCurrentProfile();
       if (!active) return;
       if (profile) {

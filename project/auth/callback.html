@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Signing in…</title>
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+  <div style="
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    font-family: var(--sans); color: var(--ink-soft); font-size: 15px;
+  " class="fade-in">
+    Signing you in…
+  </div>
+
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+  <script type="text/babel" src="../config.jsx"></script>
+  <script type="text/babel">
+    (async () => {
+      if (!isSupabaseConfigured() || !sb) {
+        window.location.replace('../index.html');
+        return;
+      }
+      const result = await handleOAuthCallback();
+      if (!result) {
+        window.location.replace('../index.html?screen=signup');
+        return;
+      }
+      const next = result.hasStage ? 'dashboard' : 'onboarding';
+      window.location.replace('../index.html?screen=' + next + '&oauth=1');
+    })();
+  </script>
+</body>
+</html>
