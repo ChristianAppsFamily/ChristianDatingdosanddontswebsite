@@ -847,7 +847,7 @@ function TopNav({ user, onNav, current }) {
         ) : (
           <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
             <NavLink onClick={() => onNav('login')}>Sign in</NavLink>
-            <button className="btn btn-primary btn-sm" onClick={() => onNav('signup')}>Start free trial</button>
+            <button className="btn btn-primary btn-sm" onClick={() => onNav('signup')}>Join the community</button>
           </div>
         )}
       </div>
@@ -943,7 +943,7 @@ function Footer() {
         <div style={{ maxWidth: 360 }}>
           <Logo />
           <p style={{ marginTop: 14, color: 'var(--ink-mute)', fontSize: 14, lineHeight: 1.6 }}>
-            A small, warm community for Christians navigating dating, engagement, and starting over. Anonymous when you need it. Always faith-forward.
+            A small, faith-forward community for Christians navigating dating, engagement, and starting over. Honest. Anonymous when it needs to be. Always grounded in the Word.
           </p>
         </div>
         <FooterColumn title="Community">

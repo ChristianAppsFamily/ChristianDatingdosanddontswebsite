@@ -392,8 +392,8 @@ function TrialExpiredOverlay({ onSubscribe }) {
           Join the community to keep reading the Wall, posting prayers, and praying with believers walking your stage.
         </p>
         <div style={{ display: 'flex', gap: 10, justifyContent: 'center', flexWrap: 'wrap' }}>
-          <button className="btn btn-primary" onClick={onSubscribe}>Subscribe — $49/year</button>
-          <button className="btn btn-ghost">$6.99/month</button>
+          <button className="btn btn-primary" onClick={onSubscribe}>Subscribe — $89/year</button>
+          <button className="btn btn-ghost">$12.99/month</button>
         </div>
         <div style={{
           marginTop: 20, paddingTop: 18, borderTop: '1px solid var(--line)',

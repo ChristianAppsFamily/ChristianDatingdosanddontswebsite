@@ -250,8 +250,8 @@ function SignupPage({ onComplete, onNav, mode = 'signup' }) {
               <>
                 <div className="eyebrow" style={{ marginTop: 6 }}>Choose a plan</div>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
-                  <PlanPick label="Monthly" price="$6.99/mo" active={plan === 'monthly'} onClick={() => setPlan('monthly')} />
-                  <PlanPick label="Annual" price="$49/yr" tag="Save 42%" active={plan === 'annual'} onClick={() => setPlan('annual')} />
+                  <PlanPick label="Monthly" price="$12.99/mo" active={plan === 'monthly'} onClick={() => setPlan('monthly')} />
+                  <PlanPick label="Annual" price="$89/yr" tag="Save 43%" active={plan === 'annual'} onClick={() => setPlan('annual')} />
                 </div>
               </>
             )}
@@ -291,7 +291,6 @@ function SignupPage({ onComplete, onNav, mode = 'signup' }) {
               marginTop: 28, paddingTop: 24, borderTop: '1px solid var(--line)',
               display: 'flex', gap: 22, fontSize: 13, color: 'var(--ink-soft)',
             }}>
-              <Stat n="2,400+" l="members" />
               <Stat n="140" l="posts this week" />
               <Stat n="4" l="life stages" />
             </div>

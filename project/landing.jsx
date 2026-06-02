@@ -78,7 +78,7 @@ function HeroCTAs({ onNav }) {
         Learn more
       </button>
       <div style={{ fontSize: 13, color: 'var(--ink-mute)', marginLeft: 6 }}>
-        7 days free. $6.99/mo or $49/yr after.
+        7 days free. $12.99/mo or $89/yr after.
       </div>
     </div>
   );
@@ -106,7 +106,6 @@ function HeroCentered({ onNav }) {
         <HeroHeadline size="xl" />
         <HeroSubhead />
         <HeroCTAs onNav={onNav} />
-        <SocialProof centered />
       </div>
     </section>
   );
@@ -127,7 +126,6 @@ function HeroAsymmetric({ onNav }) {
           <HeroHeadline />
           <HeroSubhead wide />
           <HeroCTAs onNav={onNav} />
-          <SocialProof />
         </div>
         <HeroStack />
       </div>
@@ -225,7 +223,6 @@ function HeroVerse({ onNav }) {
           <HeroHeadline />
           <HeroSubhead wide />
           <HeroCTAs onNav={onNav} />
-          <SocialProof />
         </div>
         <VerseColumn />
       </div>
@@ -288,40 +285,6 @@ function HeroBackdrop({ strong = false }) {
         ? 'radial-gradient(900px 500px at 80% -10%, rgba(200, 98, 42, 0.16), transparent 60%), radial-gradient(700px 400px at 0% 80%, rgba(200, 98, 42, 0.10), transparent 60%)'
         : 'radial-gradient(900px 500px at 80% -10%, rgba(200, 98, 42, 0.12), transparent 60%)',
     }} />
-  );
-}
-
-function SocialProof({ centered = false }) {
-  return (
-    <div style={{
-      marginTop: 32,
-      display: 'flex', alignItems: 'center', gap: 14,
-      justifyContent: centered ? 'center' : 'flex-start',
-      flexWrap: 'wrap',
-    }}>
-      <AvatarStack />
-      <div style={{ fontSize: 13.5, color: 'var(--ink-mute)' }}>
-        <span style={{ fontWeight: 600, color: 'var(--ink)' }}>2,400+ believers</span> walking through it together this week.
-      </div>
-    </div>
-  );
-}
-function AvatarStack() {
-  const letters = ['M', 'D', 'J', 'P', 'T'];
-  const colors = ['#C8622A', '#7B4A8F', '#B98328', '#4E6F94', '#2A211B'];
-  return (
-    <div style={{ display: 'flex' }}>
-      {letters.map((l, i) => (
-        <div key={i} className="serif" style={{
-          width: 32, height: 32, borderRadius: '50%',
-          background: colors[i], color: 'var(--white)',
-          border: '2px solid var(--cream)',
-          marginLeft: i === 0 ? 0 : -10,
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          fontSize: 13, fontWeight: 600,
-        }}>{l}</div>
-      ))}
-    </div>
   );
 }
 
@@ -414,12 +377,12 @@ function FeaturesSection() {
     {
       icon: <IconDaily />,
       title: 'A Daily Word',
-      body: 'A short scripture, devotional, or piece of wisdom — chosen for the season you\'re actually in.',
+      body: 'A scripture, devotional, or piece of wisdom that speaks to where you\'re uniquely at, with the hope of encouraging you.',
     },
     {
       icon: <IconWall />,
       title: 'The Wall',
-      body: 'A quiet, anonymous community thread. Pray, encourage, and amen one another by first name only.',
+      body: 'An open community thread where believers pray, encourage, and amen one another. First name and city only. Anonymous on purpose.',
     },
     {
       icon: <IconStage />,
@@ -514,7 +477,7 @@ function PricingSection({ onNav }) {
         }}>
           <PriceCard
             label="Monthly"
-            price="$6.99"
+            price="$12.99"
             cadence="per month"
             line="Try for a season, see if it sticks."
             cta="Start with monthly"
@@ -522,9 +485,9 @@ function PricingSection({ onNav }) {
           />
           <PriceCard
             label="Annual"
-            price="$49"
+            price="$89"
             cadence="per year"
-            badge="Best value · save 42%"
+            badge="Best value · save 43%"
             line="The way most members stay. Two months free."
             cta="Start annual trial"
             featured
