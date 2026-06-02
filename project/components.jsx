@@ -51,21 +51,16 @@ function Logo({ size = 'md', mono = false, onClick }) {
 
 function Monogram({ size = 32, mono = false }) {
   return (
-    <span style={{
-      width: size, height: size, borderRadius: '50%',
-      background: mono ? 'transparent' : 'var(--orange)',
-      border: mono ? '1.5px solid currentColor' : 'none',
-      color: mono ? 'currentColor' : 'var(--white)',
-      display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-      flexShrink: 0,
-    }}>
-      <span className="serif" style={{
-        fontSize: size * 0.46, fontWeight: 700, letterSpacing: '-0.04em',
-        lineHeight: 1, marginRight: -1,
-      }}>
-        D<span style={{ fontStyle: 'italic', fontWeight: 500, opacity: 0.85 }}>&amp;</span>D
-      </span>
-    </span>
+    <img
+      src="logo-mark.png"
+      alt="Christian Dating Do's &amp; Don'ts"
+      width={size}
+      height={size}
+      style={{
+        width: size, height: size,
+        display: 'inline-block', flexShrink: 0, objectFit: 'contain',
+      }}
+    />
   );
 }
 
