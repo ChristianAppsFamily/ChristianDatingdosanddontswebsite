@@ -8,6 +8,7 @@ function LandingPage({ tweaks, onNav, demoPosts }) {
       <Hero variant={tweaks.heroLayout} onNav={onNav} />
       <PreviewSection demoPosts={demoPosts} onNav={onNav} />
       <FeaturesSection />
+      <ClarityCalloutSection onNav={onNav} />
       <PricingSection onNav={onNav} />
       <ClosingCTA onNav={onNav} />
       <Footer />
@@ -24,32 +25,29 @@ function Hero({ variant = 'centered', onNav }) {
   return <HeroCentered onNav={onNav} />;
 }
 
-function HeroEyebrow() {
+function HeroHeadline({ size = 'lg' }) {
+  const fs = size === 'xl' ? 'clamp(40px, 5.4vw, 76px)' : 'clamp(36px, 4.2vw, 60px)';
   return (
-    <div className="eyebrow" style={{
-      display: 'inline-flex', alignItems: 'center', gap: 10,
-      padding: '7px 14px', borderRadius: 'var(--r-pill)',
-      background: 'var(--orange-soft)', color: 'var(--orange-text)',
+    <h1 className="serif" style={{
+      fontSize: fs, lineHeight: 1.08,
+      fontWeight: 600, letterSpacing: '-0.025em',
+      margin: '0 0 16px', color: 'var(--ink)',
+      textWrap: 'balance',
     }}>
-      <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--orange)', animation: 'pulseDot 2s infinite' }} />
-      A small, faith-forward community
-    </div>
+      A safe place for Christians navigating dating with faith.
+    </h1>
   );
 }
 
-function HeroHeadline({ size = 'lg' }) {
-  const fs = size === 'xl' ? 'clamp(48px, 6.4vw, 88px)' : 'clamp(40px, 5.4vw, 76px)';
+function HeroTagline() {
   return (
-    <h1 className="serif" style={{
-      fontSize: fs, lineHeight: 1.02,
-      fontWeight: 600, letterSpacing: '-0.025em',
-      margin: '24px 0 18px', color: 'var(--ink)',
-      textWrap: 'balance',
+    <p style={{
+      fontSize: 18.5, lineHeight: 1.55, color: 'var(--ink)',
+      maxWidth: 560, margin: '0 0 14px', fontWeight: 500,
+      textWrap: 'pretty',
     }}>
-      You don't have to navigate <span style={{
-        fontStyle: 'italic', fontWeight: 500, color: 'var(--orange)',
-      }}>Christian dating</span> alone.
-    </h1>
+      The dating season is real. So is the faith it takes to walk through it with integrity.
+    </p>
   );
 }
 
@@ -60,7 +58,7 @@ function HeroSubhead({ wide = false }) {
       maxWidth: wide ? 620 : 560, marginTop: 0, marginBottom: 32,
       textWrap: 'pretty',
     }}>
-      A daily word, a weekly question, and a quiet wall of believers walking through seeking, dating, engagement, and starting over — together.
+      A daily word, a weekly question, and a community of believers who are in it too.
     </p>
   );
 }
@@ -69,13 +67,13 @@ function HeroCTAs({ onNav }) {
   return (
     <div style={{ display: 'flex', gap: 14, alignItems: 'center', flexWrap: 'wrap' }}>
       <button className="btn btn-primary btn-lg" onClick={() => onNav('signup')}>
-        Start free trial
+        Join the community
         <ArrowRight />
       </button>
       <button className="btn btn-ghost btn-lg" onClick={() => {
         document.getElementById('how-it-works')?.scrollIntoView?.({ behavior: 'smooth', block: 'start' });
       }}>
-        Learn more
+        See how it works
       </button>
       <div style={{ fontSize: 13, color: 'var(--ink-mute)', marginLeft: 6 }}>
         7 days free. $12.99/mo or $89/yr after.
@@ -102,8 +100,8 @@ function HeroCentered({ onNav }) {
         display: 'flex', flexDirection: 'column', alignItems: 'center',
         textAlign: 'center',
       }}>
-        <HeroEyebrow />
         <HeroHeadline size="xl" />
+        <HeroTagline />
         <HeroSubhead />
         <HeroCTAs onNav={onNav} />
       </div>
@@ -122,8 +120,8 @@ function HeroAsymmetric({ onNav }) {
         gap: 56, alignItems: 'center',
       }}>
         <div>
-          <HeroEyebrow />
           <HeroHeadline />
+          <HeroTagline />
           <HeroSubhead wide />
           <HeroCTAs onNav={onNav} />
         </div>
@@ -136,9 +134,9 @@ function HeroAsymmetric({ onNav }) {
 function HeroStack() {
   // Layered preview of 3 community posts as a visual
   const samples = [
-    { name: 'Marcus', location: 'Texas', stage: 'seeking', body: "Praying for discernment — 3 months in and I want to honor Him either way." },
-    { name: 'Diane', location: 'Georgia', stage: 'starting', body: "Finally had the boundary conversation. He gave me the words." },
-    { name: 'Daniel', location: 'NC', stage: 'engaged', body: "She said yes. Glory to God." },
+    { name: 'Marcus', location: 'Texas', stage: 'seeking', category: 'prayer', body: "Praying for discernment — 3 months in and I want to honor Him either way." },
+    { name: 'Diane', location: 'Georgia', stage: 'starting', category: 'praise', body: "Finally had the boundary conversation. God gave me the words." },
+    { name: 'Daniel', location: 'NC', stage: 'engaged', category: 'praise', body: "She said yes. Glory to God." },
   ];
   return (
     <div style={{
@@ -178,7 +176,7 @@ function MiniPost({ p, reactions, highlight }) {
         <span style={{ fontWeight: 600, color: 'var(--ink)' }}>{p.name}</span> — {p.location}
       </div>
       <div style={{ display: 'flex', gap: 6, marginBottom: 10 }}>
-        <CategoryTag kind="prayer" />
+        <CategoryTag kind={p.category || 'prayer'} />
         <StageTag stage={p.stage} small />
       </div>
       <div className="serif" style={{
@@ -219,8 +217,8 @@ function HeroVerse({ onNav }) {
         gap: 64, alignItems: 'center',
       }}>
         <div>
-          <HeroEyebrow />
           <HeroHeadline />
+          <HeroTagline />
           <HeroSubhead wide />
           <HeroCTAs onNav={onNav} />
         </div>
@@ -297,8 +295,8 @@ function PreviewSection({ demoPosts, onNav }) {
       <div className="container">
         <SectionHeading
           eyebrow="The Wall"
-          title="The conversation is already happening."
-          sub="Real people, first names, sometimes a city. Anonymous when it needs to be. Always faith-forward."
+          title="Real people. First names. Honest faith."
+          sub="This is what it sounds like when Christians are willing to share their dating struggles and start praying through it together."
         />
 
         <div style={{ position: 'relative', maxWidth: 720, margin: '40px auto 0' }}>
@@ -337,7 +335,7 @@ function PreviewSection({ demoPosts, onNav }) {
                 Join to read the full Wall
               </span>
               <button className="btn btn-primary btn-sm" onClick={() => onNav('signup')}>
-                Start free trial
+                Join the community
                 <ArrowRight />
               </button>
             </div>
@@ -370,7 +368,7 @@ function SectionHeading({ eyebrow, title, sub, align = 'center' }) {
 }
 
 /* ----------------------------------------------------------------
-   FEATURES — 3 highlights
+   FEATURES — 4 highlights
    ---------------------------------------------------------------- */
 function FeaturesSection() {
   const features = [
@@ -387,21 +385,26 @@ function FeaturesSection() {
     {
       icon: <IconStage />,
       title: 'Stage-aware',
-      body: 'Seeking, dating, engaged, or starting over — filter to the believers walking the same road you are.',
+      body: 'Seeking, dating, engaged, or starting over — filter to the believers walking the same road and hear from those who\'ve been there.',
+    },
+    {
+      icon: <IconClarity />,
+      title: 'Get Clarity',
+      body: 'Ask faith-based relationship questions and receive scripture-grounded wisdom, honest reflection, and gentle encouragement — anytime. Included with every membership.',
     },
   ];
   return (
     <section id="how-it-works" style={{ padding: '88px 0' }}>
       <div className="container">
         <SectionHeading
-          eyebrow="What you get"
-          title="Three small things, done well."
-          sub="No swiping. No feeds. No algorithm. Just a daily anchor and a community that knows your stage."
+          eyebrow="What's inside"
+          title="Simple. Focused. Faith-forward."
+          sub="No algorithm. No swiping. No performance. Just a daily anchor, a community that knows your season, and wisdom when you need it."
         />
         <div style={{
           marginTop: 56,
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
           gap: 24,
         }}>
           {features.map((f, i) => (
@@ -456,44 +459,133 @@ function IconStage() {
     </svg>
   );
 }
+function IconClarity() {
+  return (
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+      <path d="M6 8.5C6 7.12 7.12 6 8.5 6h9C18.88 6 20 7.12 20 8.5v9c0 1.38-1.12 2.5-2.5 2.5h-4.5l-3.5 3v-3H8.5C7.12 18 6 16.88 6 15.5v-7z"
+            stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+      <path d="M10 11h6M10 14h4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <circle cx="19" cy="7" r="2.5" fill="var(--orange-soft)" stroke="currentColor" strokeWidth="1" />
+    </svg>
+  );
+}
+
+/* ----------------------------------------------------------------
+   CLARITY CALLOUT — between Features and Pricing
+   ---------------------------------------------------------------- */
+function ClarityCalloutSection({ onNav }) {
+  return (
+    <section style={{ padding: '72px 0', background: 'var(--cream-deep)' }}>
+      <div className="container">
+        <div style={{
+          maxWidth: 720, margin: '0 auto',
+          display: 'flex', flexDirection: 'column', gap: 18,
+          textAlign: 'center', alignItems: 'center',
+        }}>
+          <div className="eyebrow">Get Clarity</div>
+          <h2 className="serif" style={{
+            margin: 0, fontSize: 'clamp(30px, 3.6vw, 44px)', lineHeight: 1.1,
+            fontWeight: 600, letterSpacing: '-0.018em', color: 'var(--ink)',
+            textWrap: 'balance',
+          }}>
+            Faith-based insight when you need it most.
+          </h2>
+          <p style={{
+            margin: 0, fontSize: 17, lineHeight: 1.6, color: 'var(--ink-soft)',
+            maxWidth: 620, textWrap: 'pretty',
+          }}>
+            Dating is full of questions nobody warns you about. Should I bring up marriage? Is this a red flag or a me flag? How do I hold this boundary with grace?
+          </p>
+          <p style={{
+            margin: 0, fontSize: 17, lineHeight: 1.6, color: 'var(--ink-soft)',
+            maxWidth: 620, textWrap: 'pretty',
+          }}>
+            Get Clarity is a scripture-grounded conversation partner built into your membership. Ask anything about your faith, your relationship, or the season you're in — and receive honest, Word-anchored perspective in return.
+          </p>
+          <p style={{
+            margin: 0, fontSize: 17, lineHeight: 1.6, color: 'var(--ink-soft)',
+            maxWidth: 620, textWrap: 'pretty',
+          }}>
+            Not a chatbot. Not generic advice. Clarity knows your life stage, reflects today's Daily Word, and stays focused on what matters — helping you honor God in your relationships.
+          </p>
+          <p style={{
+            margin: '4px 0 8px', fontSize: 15, fontWeight: 600, color: 'var(--ink)',
+          }}>
+            10 messages per month with Community. Unlimited with Community + Clarity.
+          </p>
+          <button className="btn btn-primary btn-lg" onClick={() => onNav('signup')}>
+            Join the community
+            <ArrowRight />
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 /* ----------------------------------------------------------------
    PRICING
    ---------------------------------------------------------------- */
 function PricingSection({ onNav }) {
   return (
-    <section style={{ padding: '72px 0', background: 'var(--cream-deep)' }} id="pricing">
+    <section style={{ padding: '72px 0', background: 'var(--white)' }} id="pricing">
       <div className="container">
         <SectionHeading
-          eyebrow="Pricing"
-          title="Less than a coffee. Honest pricing."
-          sub="A 7-day free trial. Cancel anytime. The Daily Word is always visible — we never gate scripture."
+          eyebrow="Honest pricing."
+          title="No pressure."
+          sub="Seven days free. Cancel anytime. The Daily Word is always open — we will never put scripture behind a paywall."
         />
         <div style={{
           marginTop: 48,
           display: 'grid', gap: 20,
-          gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-          maxWidth: 760, marginInline: 'auto',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+          maxWidth: 820, marginInline: 'auto',
         }}>
           <PriceCard
-            label="Monthly"
+            label="Community"
             price="$12.99"
             cadence="per month"
-            line="Try for a season, see if it sticks."
-            cta="Start with monthly"
+            line="Try it for a season."
+            cta="Start free trial"
+            features={[
+              'Daily Word every morning',
+              'Stage-aware community thread',
+              'Weekly prompt for your season',
+              'Pray and amen anonymously',
+              'Get Clarity — 10 messages per month',
+            ]}
             onClick={() => onNav('signup')}
           />
           <PriceCard
-            label="Annual"
-            price="$89"
-            cadence="per year"
-            badge="Best value · save 43%"
-            line="The way most members stay. Two months free."
-            cta="Start annual trial"
+            label="Community + Clarity"
+            price="$19.99"
+            cadence="per month"
+            badge="Best value"
+            line="For the member who wants to go deeper."
+            cta="Start free trial"
             featured
+            features={[
+              'Everything in Community',
+              'Get Clarity — unlimited messages',
+              'Priority access to new features',
+            ]}
             onClick={() => onNav('signup')}
           />
         </div>
+        <p style={{
+          textAlign: 'center', margin: '28px auto 0',
+          fontSize: 15, color: 'var(--ink-soft)', lineHeight: 1.55, maxWidth: 640,
+        }}>
+          Annual options: Community <strong style={{ color: 'var(--ink)' }}>$89/year · save 43%</strong>
+          {' · '}
+          Community + Clarity <strong style={{ color: 'var(--ink)' }}>$149/year · save 38%</strong>
+        </p>
+        <p style={{
+          textAlign: 'center', margin: '12px auto 0',
+          fontSize: 14, color: 'var(--ink-mute)',
+        }}>
+          Seven days free on all plans. Cancel anytime.
+        </p>
         <ShareWithFriend />
       </div>
     </section>
@@ -563,7 +655,7 @@ function ShareWithFriend() {
   );
 }
 
-function PriceCard({ label, price, cadence, line, cta, badge, featured, onClick }) {
+function PriceCard({ label, price, cadence, line, cta, badge, featured, features = [], onClick }) {
   return (
     <div style={{
       position: 'relative',
@@ -602,10 +694,9 @@ function PriceCard({ label, price, cadence, line, cta, badge, featured, onClick 
         {cta}
       </button>
       <ul style={{ listStyle: 'none', padding: 0, margin: '22px 0 0', display: 'flex', flexDirection: 'column', gap: 10 }}>
-        <FeatureLi featured={featured}>Daily Word, every morning</FeatureLi>
-        <FeatureLi featured={featured}>Stage-aware community thread</FeatureLi>
-        <FeatureLi featured={featured}>Weekly prompt for your season</FeatureLi>
-        <FeatureLi featured={featured}>Pray and amen anonymously</FeatureLi>
+        {features.map((item, i) => (
+          <FeatureLi key={i} featured={featured}>{item}</FeatureLi>
+        ))}
       </ul>
     </div>
   );
@@ -637,25 +728,25 @@ function ClosingCTA({ onNav }) {
       }}>
         <DecorCircleLg />
         <div className="eyebrow" style={{ color: 'rgba(255, 255, 255, 0.65)', position: 'relative' }}>
-          The hard road, walked together
+          The season you're in deserves more than advice from the internet.
         </div>
         <h2 className="serif" style={{
-          margin: '16px auto 18px', fontSize: 'clamp(34px, 4vw, 56px)',
-          fontWeight: 600, letterSpacing: '-0.02em', lineHeight: 1.05,
+          margin: '16px auto 18px', fontSize: 'clamp(28px, 3.4vw, 44px)',
+          fontWeight: 600, letterSpacing: '-0.02em', lineHeight: 1.15,
           maxWidth: 720, textWrap: 'balance', position: 'relative',
         }}>
-          You weren't meant to figure this out alone.
+          A daily word. A weekly question. A community of believers who are honest about how hard this can be apart from God and His people.
         </h2>
         <p style={{
           maxWidth: 520, margin: '0 auto 28px',
           color: 'rgba(255, 255, 255, 0.78)', fontSize: 17, lineHeight: 1.55,
           position: 'relative',
         }}>
-          Seven days free. No swiping, no algorithm. Just the Word, a question, and the company of the saints.
+          Seven days free. No credit card required to start.
         </p>
         <div style={{ position: 'relative' }}>
           <button className="btn btn-primary btn-lg" onClick={() => onNav('signup')}>
-            Start free trial
+            Join the community
             <ArrowRight />
           </button>
         </div>

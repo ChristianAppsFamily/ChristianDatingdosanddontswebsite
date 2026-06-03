@@ -949,19 +949,18 @@ function Footer() {
         <FooterColumn title="Community">
           <FooterLink>Daily Word</FooterLink>
           <FooterLink>The Wall</FooterLink>
-          <FooterLink>Weekly Prompt</FooterLink>
-          <FooterLink>Library</FooterLink>
         </FooterColumn>
         <FooterColumn title="About">
-          <FooterLink>Our story</FooterLink>
-          <FooterLink>Statement of faith</FooterLink>
+          <FooterLink>Our Story</FooterLink>
+          <FooterLink>What We Believe</FooterLink>
+          <FooterLink>The Gospel</FooterLink>
           <FooterLink>Pricing</FooterLink>
           <FooterLink>Contact</FooterLink>
         </FooterColumn>
-        <FooterColumn title="Quiet">
+        <FooterColumn title="Legal">
           <FooterLink>Privacy</FooterLink>
           <FooterLink>Terms</FooterLink>
-          <FooterLink>Community rules</FooterLink>
+          <FooterLink>Community Rules</FooterLink>
         </FooterColumn>
       </div>
       <div className="container" style={{
