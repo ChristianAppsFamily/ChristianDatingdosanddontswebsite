@@ -494,14 +494,72 @@ function PricingSection({ onNav }) {
             onClick={() => onNav('signup')}
           />
         </div>
-        <div style={{
-          textAlign: 'center', marginTop: 24,
-          fontSize: 13, color: 'var(--ink-mute)',
-        }}>
-          Need help affording it? <a href="#" style={{ color: 'var(--orange)', textDecoration: 'none', fontWeight: 600 }}>Email us</a> — we have a sponsored seats program.
-        </div>
+        <ShareWithFriend />
       </div>
     </section>
+  );
+}
+
+function ShareWithFriend() {
+  const [copied, setCopied] = useState(false);
+
+  const handleShare = async () => {
+    const url = 'https://christiandatingdosanddonts.com';
+    const title = "Christian Dating Do's and Don'ts";
+    const text = 'Found this faith-based community for Christians navigating dating — thought you might appreciate it.';
+
+    if (navigator.share) {
+      try {
+        await navigator.share({ title, text, url });
+      } catch (e) {
+        // user dismissed share sheet — no-op
+      }
+    } else {
+      try {
+        await navigator.clipboard.writeText(url);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      } catch (e) {
+        console.error('Share copy failed:', e);
+      }
+    }
+  };
+
+  return (
+    <div style={{ textAlign: 'center', marginTop: 28 }}>
+      <p className="serif" style={{
+        margin: '0 0 10px', fontSize: 14, color: 'var(--ink-mute)', fontStyle: 'italic',
+      }}>
+        Don't want to join alone? Bring a friend.
+      </p>
+      <button
+        type="button"
+        onClick={handleShare}
+        style={{
+          display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+          height: 38, padding: '0 18px',
+          borderRadius: 'var(--r-pill)',
+          border: `1.5px solid ${copied ? 'var(--orange)' : 'var(--line)'}`,
+          background: 'transparent',
+          color: copied ? 'var(--orange)' : 'var(--ink-soft)',
+          fontFamily: 'var(--sans)', fontSize: 13.5, fontWeight: 600,
+          cursor: 'pointer',
+          transition: 'all 140ms ease',
+        }}
+        onMouseEnter={e => {
+          if (copied) return;
+          e.currentTarget.style.borderColor = 'var(--orange)';
+          e.currentTarget.style.color = 'var(--orange)';
+        }}
+        onMouseLeave={e => {
+          if (copied) return;
+          e.currentTarget.style.borderColor = 'var(--line)';
+          e.currentTarget.style.color = 'var(--ink-soft)';
+        }}
+      >
+        {copied ? '✓ Link copied' : '↗ Share with a friend'}
+      </button>
+    </div>
   );
 }
 
