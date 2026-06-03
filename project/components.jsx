@@ -929,28 +929,65 @@ function MenuItem({ children, onClick }) {
 /* ----------------------------------------------------------------
    FOOTER
    ---------------------------------------------------------------- */
+const FOOTER_ROUTES = {
+  'daily-word': '/daily-word',
+  'our-story': '/our-story',
+  'what-we-believe': '/what-we-believe',
+  'the-gospel': '/the-gospel',
+  privacy: '/privacy',
+  terms: '/terms',
+  'community-rules': '/community-rules',
+  landing: '/',
+  signup: '/signup',
+  dashboard: '/dashboard',
+};
+
 function Footer({ onNav, user }) {
-  const nav = onNav || window.cdddNavigate;
   const currentUser = user ?? window.cdddUser ?? null;
+
+  const navTo = (screen) => (e) => {
+    if (e) e.preventDefault();
+    const nav = onNav || window.cdddNavigate;
+    if (nav) {
+      nav(screen);
+      return;
+    }
+    const href = FOOTER_ROUTES[screen];
+    if (href) window.location.href = href;
+  };
 
   const goPricing = (e) => {
     if (e) e.preventDefault();
     const path = window.location.pathname.replace(/\/$/, '') || '/';
-    const onLanding = path === '/' && window.cdddScreen === 'landing';
-    if (onLanding) {
-      document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' });
+    const onLanding = path === '/' && (window.cdddScreen === 'landing' || !window.cdddScreen);
+    const nav = onNav || window.cdddNavigate;
+    if (onLanding && nav) {
+      nav('landing', { hash: '#pricing' });
+      scrollToPricingAnchor();
+    } else if (onLanding) {
+      scrollToPricingAnchor();
     } else {
       window.location.href = '/#pricing';
     }
   };
 
+  function scrollToPricingAnchor() {
+    setTimeout(() => {
+      document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' });
+    }, 120);
+  }
+
   const goWall = (e) => {
     if (e) e.preventDefault();
+    const nav = onNav || window.cdddNavigate;
     if (currentUser) {
       window.cdddScrollToWall = true;
-      nav?.('dashboard');
+      if (nav) nav('dashboard');
+      else window.location.href = '/dashboard';
+    } else if (nav) {
+      nav('signup');
     } else {
-      nav?.('signup');
+      window.location.href = '/signup';
     }
   };
 
@@ -965,26 +1002,26 @@ function Footer({ onNav, user }) {
         gap: 32, flexWrap: 'wrap',
       }}>
         <div style={{ maxWidth: 360 }}>
-          <Logo onClick={() => nav?.('landing')} />
+          <Logo onClick={navTo('landing')} />
           <p style={{ marginTop: 14, color: 'var(--ink-mute)', fontSize: 14, lineHeight: 1.6 }}>
             A small, faith-forward community for Christians navigating dating, engagement, and starting over. Honest. Anonymous when it needs to be. Always grounded in the Word.
           </p>
         </div>
         <FooterColumn title="Community">
-          <FooterLink onClick={() => nav?.('daily-word')}>Daily Word</FooterLink>
+          <FooterLink to="daily-word" onClick={navTo('daily-word')}>Daily Word</FooterLink>
           <FooterLink onClick={goWall}>The Wall</FooterLink>
         </FooterColumn>
         <FooterColumn title="About">
-          <FooterLink onClick={() => nav?.('our-story')}>Our Story</FooterLink>
-          <FooterLink onClick={() => nav?.('what-we-believe')}>What We Believe</FooterLink>
-          <FooterLink onClick={() => nav?.('the-gospel')}>The Gospel</FooterLink>
+          <FooterLink to="our-story" onClick={navTo('our-story')}>Our Story</FooterLink>
+          <FooterLink to="what-we-believe" onClick={navTo('what-we-believe')}>What We Believe</FooterLink>
+          <FooterLink to="the-gospel" onClick={navTo('the-gospel')}>The Gospel</FooterLink>
           <FooterLink onClick={goPricing}>Pricing</FooterLink>
           <FooterLink href="mailto:ChristianAppEmpire@gmail.com">Contact</FooterLink>
         </FooterColumn>
         <FooterColumn title="Legal">
-          <FooterLink onClick={() => nav?.('privacy')}>Privacy</FooterLink>
-          <FooterLink onClick={() => nav?.('terms')}>Terms</FooterLink>
-          <FooterLink onClick={() => nav?.('community-rules')}>Community Rules</FooterLink>
+          <FooterLink to="privacy" onClick={navTo('privacy')}>Privacy</FooterLink>
+          <FooterLink to="terms" onClick={navTo('terms')}>Terms</FooterLink>
+          <FooterLink to="community-rules" onClick={navTo('community-rules')}>Community Rules</FooterLink>
         </FooterColumn>
       </div>
       <div className="container" style={{
@@ -1009,8 +1046,9 @@ function FooterColumn({ title, children }) {
     </div>
   );
 }
-function FooterLink({ children, href, onClick }) {
-  if (href) {
+function FooterLink({ children, href, to, onClick }) {
+  const linkHref = href || (to ? FOOTER_ROUTES[to] : '#');
+  if (href && href.startsWith('mailto:')) {
     return (
       <a href={href} style={{
         color: 'var(--ink-soft)', fontSize: 14, textDecoration: 'none',
@@ -1022,7 +1060,7 @@ function FooterLink({ children, href, onClick }) {
     );
   }
   return (
-    <a href="#" onClick={(e) => { e.preventDefault(); onClick?.(e); }} style={{
+    <a href={linkHref} onClick={onClick} style={{
       color: 'var(--ink-soft)', fontSize: 14, textDecoration: 'none',
       transition: 'color 120ms ease', cursor: 'pointer',
     }}

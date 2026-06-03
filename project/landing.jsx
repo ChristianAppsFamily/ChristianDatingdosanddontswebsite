@@ -10,7 +10,7 @@ function LandingPage({ tweaks, onNav, demoPosts }) {
       <FeaturesSection />
       <PricingSection onNav={onNav} />
       <ClosingCTA onNav={onNav} />
-      <Footer />
+      <Footer onNav={onNav} />
     </div>
   );
 }
