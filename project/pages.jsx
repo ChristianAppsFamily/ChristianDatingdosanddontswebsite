@@ -1,4 +1,4 @@
-/* pages.jsx — footer-linked static pages */
+/* pages.jsx, footer-linked static pages */
 
 const { useState, useEffect, useRef } = React;
 
@@ -72,7 +72,7 @@ function OrangeTextLink({ children, onClick }) {
 }
 
 /* ----------------------------------------------------------------
-   DAILY WORD — data helpers (Supabase; does not modify data.jsx)
+   DAILY WORD, data helpers (Supabase; does not modify data.jsx)
    ---------------------------------------------------------------- */
 const DEFAULT_REACTION_COUNTS = { praying: 12, with_you: 8, amen: 24 };
 
@@ -272,7 +272,7 @@ function DailyWordPage({ user, onNav }) {
           <p style={{
             margin: '0 0 22px', fontSize: 14.5, color: 'var(--ink-soft)', lineHeight: 1.6,
           }}>
-            Join a community of believers navigating dating, engagement, and starting over — together. Seven days free.
+            Join a community of believers navigating dating, engagement, and starting over, together. Seven days free.
           </p>
           <button className="btn btn-primary btn-lg" onClick={() => onNav('signup')}>
             Join the community
@@ -293,11 +293,11 @@ function OurStoryPage({ user, onNav }) {
   usePageTitle('Our Story');
 
   const paragraphs = [
-    'We are Christian App Empire — a small, faith-rooted company founded by a married couple based in Los Angeles.',
-    'We have been together for nearly twenty years. We have six kids. We have watched relationships begin in hope and grow into something lasting. We have also watched relationships we loved — friends, family, church family — grow fragile and fall apart. We have been through seasons of our own that we did not expect and did not have a map for.',
-    'What we know from all of it is this: encouragement from community is not optional. It is essential. The people around you — the ones who have been where you are, who are honest about what it cost them, who will pray with you and not just advise you — matter more than any article, podcast, or algorithm ever could.',
+    'We are Christian App Empire, a small, faith-rooted company founded by a married couple based in Los Angeles.',
+    'We have been together for nearly twenty years. We have six kids. We have watched relationships begin in hope and grow into something lasting. We have also watched relationships we loved, whether friends, family, or church family, grow fragile and fall apart. We have been through seasons of our own that we did not expect and did not have a map for.',
+    'What we know from all of it is this: encouragement from community is not optional. It is essential. The people around you, the ones who have been where you are, who are honest about what it cost them, who will pray with you and not just advise you, matter more than any article, podcast, or algorithm ever could.',
     'We also know we do not have all the answers. Nobody does. That is exactly why we built this.',
-    'Christian Dating Do\'s and Don\'ts is not a platform built by experts telling you what to do. It is a space where believers at every stage of the journey — seeking, dating, engaged, starting over — can find a daily word, an honest question, and the company of people who are in it too.',
+    'Christian Dating Do\'s and Don\'ts is not a platform built by experts telling you what to do. It is a space where believers at every stage of the journey, whether seeking, dating, engaged, or starting over, can find a daily word, an honest question, and the company of people who are in it too.',
   ];
 
   return (
@@ -488,7 +488,7 @@ function TheGospelPage({ user, onNav }) {
         <p style={{
           margin: '24px 0 0', fontSize: 13, color: 'var(--ink-mute)', fontStyle: 'italic',
         }}>
-          Gospel presentation by Grace Community Church — Sun Valley, CA
+          Gospel presentation by Grace Community Church, Sun Valley, CA
         </p>
 
         <div style={{ height: 1, background: 'var(--line)', margin: '40px 0' }} />
@@ -632,7 +632,7 @@ function CommunityRulesPage({ user, onNav }) {
     },
     {
       title: 'Encourage, don\'t advise.',
-      body: 'You are not anyone\'s counselor or pastor here. Offer prayer, share your experience, speak life — but resist the urge to tell someone what they should do.',
+      body: 'You are not anyone\'s counselor or pastor here. Offer prayer, share your experience, speak life, but resist the urge to tell someone what they should do.',
     },
     {
       title: 'No soliciting, no promoting.',
@@ -696,7 +696,7 @@ function CommunityRulesPage({ user, onNav }) {
           }}>
             Posts that violate these rules will be removed. Repeated violations result in removal from the community. Moderation decisions are final.
             <br /><br />
-            We reserve the right to remove any content that contradicts the spirit of this space — even if it does not violate a specific rule.
+            We reserve the right to remove any content that contradicts the spirit of this space, even if it does not violate a specific rule.
           </p>
         </div>
       </main>

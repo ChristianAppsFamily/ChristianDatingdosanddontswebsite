@@ -1,13 +1,13 @@
-/* pages-content.jsx — static copy for What We Believe & The Gospel */
+/* pages-content.jsx, static copy for What We Believe & The Gospel */
 
 const GOSPEL_SECTIONS = [
   {
     title: 'God Is Sovereign Creator',
-    body: 'Scripture teaches that God created the heavens and the earth and everything in them. He made mankind — male and female — in His own image to know Him, enjoy Him, and glorify Him forever. Because He is Creator, every person owes Him worship, obedience, and gratitude. Nothing in our lives is outside His sovereign rule.',
+    body: 'Scripture teaches that God created the heavens and the earth and everything in them. He made mankind, male and female, in His own image to know Him, enjoy Him, and glorify Him forever. Because He is Creator, every person owes Him worship, obedience, and gratitude. Nothing in our lives is outside His sovereign rule.',
   },
   {
     title: 'God Is Holy',
-    body: 'God is not merely powerful; He is perfectly holy. He is utterly without sin, wholly righteous, and cannot look upon evil with approval. His holiness means that He always does what is right, and that sin is not a small offense against a distant deity — it is rebellion against the God who made us and who defines what is good.',
+    body: 'God is not merely powerful; He is perfectly holy. He is utterly without sin, wholly righteous, and cannot look upon evil with approval. His holiness means that He always does what is right, and that sin is not a small offense against a distant deity. It is rebellion against the God who made us and who defines what is good.',
   },
   {
     title: 'Mankind Is Sinful',
@@ -15,15 +15,15 @@ const GOSPEL_SECTIONS = [
   },
   {
     title: 'Sin Demands a Penalty',
-    body: 'Because God is just, sin cannot go unpunished. The wages of sin is death — spiritual death now and eternal separation from God in judgment. God would be unjust if He simply ignored rebellion. Yet in His mercy He did not leave humanity without hope. He provided a way for sinners to be forgiven without compromising His holiness.',
+    body: 'Because God is just, sin cannot go unpunished. The wages of sin is death, spiritual death now and eternal separation from God in judgment. God would be unjust if He simply ignored rebellion. Yet in His mercy He did not leave humanity without hope. He provided a way for sinners to be forgiven without compromising His holiness.',
   },
   {
     title: 'Jesus Is Lord and Savior',
-    body: 'Jesus Christ, the eternal Son of God, became man, lived a sinless life, and died on the cross as a substitute for sinners. He bore the penalty we deserved, rose bodily from the dead, and ascended to heaven where He reigns as Lord. Salvation is found in Him alone — not in our effort, our goodness, or our religious performance, but in His finished work on our behalf.',
+    body: 'Jesus Christ, the eternal Son of God, became man, lived a sinless life, and died on the cross as a substitute for sinners. He bore the penalty we deserved, rose bodily from the dead, and ascended to heaven where He reigns as Lord. Salvation is found in Him alone, not in our effort, our goodness, or our religious performance, but in His finished work on our behalf.',
   },
   {
     title: 'The Character of Saving Faith',
-    body: 'Saving faith is not mere intellectual agreement. It is a wholehearted trust in Christ — turning from sin and resting in Jesus as Lord and Savior. Those who truly believe are forgiven, made new, and brought into fellowship with God. If you sense your need before a holy God, call on Him. Repent and believe the gospel. He is able and willing to save.',
+    body: 'Saving faith is not mere intellectual agreement. It is a wholehearted trust in Christ, turning from sin and resting in Jesus as Lord and Savior. Those who truly believe are forgiven, made new, and brought into fellowship with God. If you sense your need before a holy God, call on Him. Repent and believe the gospel. He is able and willing to save.',
   },
 ];
 
@@ -45,7 +45,7 @@ const STATEMENT_OF_FAITH = [
     title: 'God',
     paragraphs: [
       'We teach that there is but one living and true God (Deuteronomy 6:4; Isaiah 45:5–7; 1 Corinthians 8:4), an eternal (Revelation 1:8), infinite (Job 11:7–10), absolute Spirit (John 4:24), without parts (Exodus 3:14; 1 John 1:5; 4:8), perfect in all His attributes, including incomprehensibility (Romans 11:33), omniscience (1 John 3:20), omnipotence (Genesis 18:14), omnipresence (Psalm 139:7–10), immutability (Malachi 3:6), and aseity (Exodus 3:14; John 5:26).',
-      'We teach that this God is one in essence (having one mind, one will, and one power), eternally existing in three coequal and consubstantial Persons—Father, Son, and Holy Spirit (Matthew 28:19; 2 Corinthians 13:14)—each uncreated and distinct, and each equally deserving worship and obedience. Therefore, we teach that the Father is of none, neither begotten nor proceeding (John 5:26); the Son is eternally begotten of the Father (John 1:14; 1:18; 3:16; 5:26; cf. Psalm 2:7); and the Holy Spirit eternally proceeds from the Father and the Son (John 15:26).',
+      'We teach that this God is one in essence (having one mind, one will, and one power), eternally existing in three coequal and consubstantial Persons: Father, Son, and Holy Spirit (Matthew 28:19; 2 Corinthians 13:14), each uncreated and distinct, and each equally deserving worship and obedience. Therefore, we teach that the Father is of none, neither begotten nor proceeding (John 5:26); the Son is eternally begotten of the Father (John 1:14; 1:18; 3:16; 5:26; cf. Psalm 2:7); and the Holy Spirit eternally proceeds from the Father and the Son (John 15:26).',
     ],
   },
   {
@@ -96,14 +96,14 @@ const STATEMENT_OF_FAITH = [
       'We teach that mankind was created by God as either male or female, distinct sexes that are biologically defined and divinely imparted to each individual at conception (Genesis 1:27; 2:5–23; Job 3:3; Psalm 139:13–14; 1 Corinthians 11:3–15). Attempting to confuse the two sexes is an abomination to God (Leviticus 18:22; Deuteronomy 22:5; Romans 1:26–27; 1 Corinthians 6:9–10).',
       'We teach that God\'s intention in the creation of man was that man should glorify God, enjoy God\'s fellowship, live his life according to the will of God, and by this accomplish God\'s purpose for man in the world (Isaiah 43:7; 1 Corinthians 10:31; Colossians 1:16; Revelation 4:11).',
       'We teach that, in Adam\'s sin of disobedience to the revealed will and Word of God, man lost his innocence, incurred the penalty of spiritual and physical death, became subject to the wrath of God, and became inherently corrupt and utterly incapable of choosing or doing that which is acceptable to God apart from divine grace. With no recuperative powers to enable him to recover himself, man is hopelessly lost. Man\'s salvation is thereby wholly of God\'s grace through the redemptive work of our Lord Jesus Christ (Genesis 2:16–17; 3:1–19; John 3:36; Romans 3:23; 6:23; 1 Corinthians 2:14; Ephesians 2:1–3; 1 Timothy 2:13–14; 1 John 1:8).',
-      'We teach that because all men were in Adam—united with him as the representative of humanity—the guilt of sin was imputed and a corrupt nature was transmitted to all men of all ages, Jesus Christ being the only exception (Romans 5:12, 18–19; 8:3; 1 Corinthians 15:22; 2 Corinthians 5:21). All men are thus sinners by nature, by choice, and by divine declaration (Psalm 14:1–3; Jeremiah 17:9; Romans 3:9–18, 23; 5:10–12).',
+      'We teach that because all men were in Adam, united with him as the representative of humanity, the guilt of sin was imputed and a corrupt nature was transmitted to all men of all ages, Jesus Christ being the only exception (Romans 5:12, 18–19; 8:3; 1 Corinthians 15:22; 2 Corinthians 5:21). All men are thus sinners by nature, by choice, and by divine declaration (Psalm 14:1–3; Jeremiah 17:9; Romans 3:9–18, 23; 5:10–12).',
     ],
   },
   {
     id: 'salvation',
     title: 'Salvation',
     paragraphs: [
-      'We teach that salvation is wholly of God by grace on the basis of the redemption of Jesus Christ—the merits both of His life of perfect righteousness and His atoning blood—and not on the basis of human merits or works (John 1:12; Romans 5:18–19; Ephesians 1:7; 2:8–10; 1 Peter 1:18–19).',
+      'We teach that salvation is wholly of God by grace on the basis of the redemption of Jesus Christ, the merits both of His life of perfect righteousness and His atoning blood, and not on the basis of human merits or works (John 1:12; Romans 5:18–19; Ephesians 1:7; 2:8–10; 1 Peter 1:18–19).',
     ],
     subsections: [
       {
@@ -144,7 +144,7 @@ const STATEMENT_OF_FAITH = [
         paragraphs: [
           'We teach that every believer is sanctified (set apart) unto God at conversion, declared to be holy, and is therefore identified as a saint. This sanctification is positional and instantaneous and should not be confused with progressive sanctification (Acts 20:32; 1 Corinthians 1:2, 30; 6:11; 2 Thessalonians 2:13; Hebrews 2:11; 3:1; 10:10, 14; 13:12; 1 Peter 1:2).',
           'We teach that there is also, by the work of the Holy Spirit, a progressive sanctification by which the state of the believer is brought into greater conformity with the standing the believer positionally enjoys through justification (John 17:17, 19; Romans 6:1–22; 8:29; 2 Corinthians 3:18; 1 Thessalonians 4:3–4; 5:23).',
-          'In this respect, we teach that every saved person is involved in a daily conflict—the new creation in Christ doing battle against the flesh—but adequate provision is made for victory through the power of the indwelling Holy Spirit. The struggle nevertheless stays with the believer all through this earthly life and is not completely ended until he sees Christ face to face (Galatians 5:16–25; Ephesians 4:22–24; Philippians 3:12; Colossians 3:9–10; 1 Peter 1:14–16; 1 John 3:2–9).',
+          'In this respect, we teach that every saved person is involved in a daily conflict, the new creation in Christ doing battle against the flesh, but adequate provision is made for victory through the power of the indwelling Holy Spirit. The struggle nevertheless stays with the believer all through this earthly life and is not completely ended until he sees Christ face to face (Galatians 5:16–25; Ephesians 4:22–24; Philippians 3:12; Colossians 3:9–10; 1 Peter 1:14–16; 1 John 3:2–9).',
         ],
       },
       {

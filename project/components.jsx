@@ -1,9 +1,9 @@
-/* components.jsx — shared UI for Christian Dating Do's & Don'ts */
+/* components.jsx, shared UI for Christian Dating Do's & Don'ts */
 
 const { useState, useEffect, useRef, useMemo } = React;
 
 /* ----------------------------------------------------------------
-   LIFE STAGES — single source of truth
+   LIFE STAGES, single source of truth
    ---------------------------------------------------------------- */
 const STAGES = {
   seeking:  { id: 'seeking',  label: 'Seeking',       glyph: '🔍', color: 'var(--stage-seeking)',   bg: 'var(--stage-seeking-bg)',   note: 'Single, trusting God' },
@@ -65,7 +65,7 @@ function Monogram({ size = 32, mono = false }) {
 }
 
 /* ----------------------------------------------------------------
-   LIFE STAGE TAG — small colored pill
+   LIFE STAGE TAG, small colored pill
    ---------------------------------------------------------------- */
 function StageTag({ stage, small = false }) {
   const s = STAGES[stage];
@@ -86,7 +86,7 @@ function StageTag({ stage, small = false }) {
 }
 
 /* ----------------------------------------------------------------
-   CATEGORY TAG — Prayer Request / Praise Report / Reflection
+   CATEGORY TAG, Prayer Request / Praise Report / Reflection
    matches the soft cream-orange tag style from Altar Wall
    ---------------------------------------------------------------- */
 function CategoryTag({ kind = 'prayer' }) {
@@ -109,7 +109,7 @@ function CategoryTag({ kind = 'prayer' }) {
 }
 
 /* ----------------------------------------------------------------
-   REACTION PILL — Altar Wall style
+   REACTION PILL, Altar Wall style
    Primary = filled burnt orange; secondaries = outlined white
    ---------------------------------------------------------------- */
 function ReactionPill({ emoji, label, count, active = false, primary = false, onClick }) {
@@ -142,7 +142,7 @@ function ReactionPill({ emoji, label, count, active = false, primary = false, on
 }
 
 /* ----------------------------------------------------------------
-   POST CARD — community thread item, Altar Wall style
+   POST CARD, community thread item, Altar Wall style
    ---------------------------------------------------------------- */
 function PostCard({ post, onReact, onReply, onReplyReact, locked = false, dim = false, teaser = false }) {
   const [expanded, setExpanded] = useState(false);
@@ -161,7 +161,7 @@ function PostCard({ post, onReact, onReply, onReplyReact, locked = false, dim = 
     setExpanded(v => !v);
   };
 
-  // Inner click guards — anything interactive stops propagation so the card click doesn't fire.
+  // Inner click guards, anything interactive stops propagation so the card click doesn't fire.
   const stop = (e) => e.stopPropagation();
 
   return (
@@ -182,7 +182,7 @@ function PostCard({ post, onReact, onReply, onReplyReact, locked = false, dim = 
       onMouseEnter={e => { if (interactive && !expanded) e.currentTarget.style.boxShadow = '0 1px 3px rgba(74,47,22,0.08), 0 12px 28px rgba(74,47,22,0.10)'; }}
       onMouseLeave={e => { if (interactive) e.currentTarget.style.boxShadow = 'var(--shadow-card)'; }}
     >
-      {/* author row — clickable header for collapse */}
+      {/* author row, clickable header for collapse */}
       <header
         onClick={handleHeaderClick}
         style={{
@@ -193,7 +193,7 @@ function PostCard({ post, onReact, onReply, onReplyReact, locked = false, dim = 
       >
         <div style={{ fontSize: 14, color: 'var(--ink-soft)' }}>
           <span style={{ fontWeight: 600, color: 'var(--ink)' }}>{post.name}</span>
-          <span style={{ color: 'var(--ink-mute)' }}> — {post.location}</span>
+          <span style={{ color: 'var(--ink-mute)' }}> · {post.location}</span>
         </div>
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: 10 }}>
           <span style={{ fontSize: 12, color: 'var(--ink-mute)', whiteSpace: 'nowrap' }}>{post.time}</span>
@@ -261,7 +261,7 @@ function PostCard({ post, onReact, onReply, onReplyReact, locked = false, dim = 
 }
 
 /* ----------------------------------------------------------------
-   CHEVRON — small expand/collapse indicator
+   CHEVRON, small expand/collapse indicator
    ---------------------------------------------------------------- */
 function Chevron({ up }) {
   return (
@@ -280,7 +280,7 @@ function Chevron({ up }) {
 }
 
 /* ----------------------------------------------------------------
-   REPLIES PILL — outlined count, matches reaction pill metrics
+   REPLIES PILL, outlined count, matches reaction pill metrics
    ---------------------------------------------------------------- */
 function RepliesPill({ count, active, interactive = true, onClick }) {
   return (
@@ -312,7 +312,7 @@ function RepliesPill({ count, active, interactive = true, onClick }) {
 }
 
 /* ----------------------------------------------------------------
-   REPLIES SECTION — list + composer
+   REPLIES SECTION, list + composer
    ---------------------------------------------------------------- */
 function RepliesSection({ post, replies, locked, onReply, onReplyReact }) {
   const [showAll, setShowAll] = useState(false);
@@ -373,7 +373,7 @@ function RepliesSection({ post, replies, locked, onReply, onReplyReact }) {
 }
 
 /* ----------------------------------------------------------------
-   REPLY ITEM — single reply, smaller reaction pills
+   REPLY ITEM, single reply, smaller reaction pills
    ---------------------------------------------------------------- */
 function ReplyItem({ postId, reply, locked, onReact }) {
   return (
@@ -390,7 +390,7 @@ function ReplyItem({ postId, reply, locked, onReact }) {
         <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, flexWrap: 'wrap' }}>
           <span style={{ fontSize: 13.5, color: 'var(--ink-soft)' }}>
             <span style={{ fontWeight: 600, color: 'var(--ink)' }}>{reply.name}</span>
-            <span style={{ color: 'var(--ink-mute)' }}> — {reply.location}</span>
+            <span style={{ color: 'var(--ink-mute)' }}> · {reply.location}</span>
           </span>
           <StageTag stage={reply.stage} small />
         </div>
@@ -430,7 +430,7 @@ function ReplyItem({ postId, reply, locked, onReact }) {
 }
 
 /* ----------------------------------------------------------------
-   SMALL REACTION PILL — same shape, reduced metrics
+   SMALL REACTION PILL, same shape, reduced metrics
    ---------------------------------------------------------------- */
 function SmallReactionPill({ emoji, label, count, active = false, primary = false, onClick }) {
   const filled = active || primary;
@@ -462,7 +462,7 @@ function SmallReactionPill({ emoji, label, count, active = false, primary = fals
 }
 
 /* ----------------------------------------------------------------
-   REPLY COMPOSER — single-line input + inline Post button
+   REPLY COMPOSER, single-line input + inline Post button
    ---------------------------------------------------------------- */
 function ReplyComposer({ locked, onSubmit }) {
   const [text, setText] = useState('');
@@ -564,7 +564,7 @@ function ReplyComposer({ locked, onSubmit }) {
 }
 
 /* ----------------------------------------------------------------
-   FILTER BAR — All / Seeking / Dating / Engaged / Starting Over
+   FILTER BAR, All / Seeking / Dating / Engaged / Starting Over
    ---------------------------------------------------------------- */
 function FilterBar({ value, onChange }) {
   const opts = [
@@ -605,7 +605,7 @@ function FilterBar({ value, onChange }) {
 }
 
 /* ----------------------------------------------------------------
-   SHARE BOX — top of thread
+   SHARE BOX, top of thread
    ---------------------------------------------------------------- */
 function ShareBox({ onSubmit, stage }) {
   const [text, setText] = useState('');
@@ -680,7 +680,7 @@ function ShareBox({ onSubmit, stage }) {
 }
 
 /* ----------------------------------------------------------------
-   APP BANNER — slim, dismissible, sits above the landing TopNav
+   APP BANNER, slim, dismissible, sits above the landing TopNav
    ---------------------------------------------------------------- */
 const APP_STORE_URL = (typeof CONFIG !== 'undefined' && CONFIG.APP_STORE_URL) ? CONFIG.APP_STORE_URL : 'https://apps.apple.com/';
 const APP_BANNER_KEY = 'cddd:appBannerDismissed';
@@ -731,9 +731,9 @@ function AppBanner() {
           whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis',
         }}>
           <span aria-hidden style={{ marginRight: 8 }}>📱</span>
-          Also available on iOS — Get the free app.
+          Also available on iOS. Get the free app.
           <span style={{ opacity: 0.78, marginLeft: 8 }}>
-            Your app and community accounts are separate — that's by design.
+            Your app and community accounts are separate. That's by design.
           </span>
         </div>
         <a
@@ -755,7 +755,7 @@ function AppBanner() {
 }
 
 /* ----------------------------------------------------------------
-   APP CARD — permanent right-rail card on the dashboard
+   APP CARD, permanent right-rail card on the dashboard
    ---------------------------------------------------------------- */
 function AppCard() {
   return (
@@ -797,7 +797,7 @@ function AppCard() {
       }}>
         <span className="serif" style={{ fontStyle: 'italic' }}>Two ways to stay in the Word. One mission.</span>
         <span style={{ display: 'block', color: 'var(--ink-mute)', marginTop: 4 }}>
-          Your app and community accounts are separate — use the same email on both to keep things organized.
+          Your app and community accounts are separate. Use the same email on both to keep things organized.
         </span>
       </div>
       <a
@@ -821,7 +821,7 @@ function AppCard() {
 }
 
 /* ----------------------------------------------------------------
-   TOP NAV — full width
+   TOP NAV, full width
    ---------------------------------------------------------------- */
 function TopNav({ user, onNav, current }) {
   return (
@@ -1031,7 +1031,7 @@ function Footer({ onNav, user }) {
       }}>
         <div>© {new Date().getFullYear()} Christian Dating Do's &amp; Don'ts</div>
         <div style={{ fontStyle: 'italic', fontFamily: 'var(--serif)' }}>
-          “Plans fail for lack of counsel, but with many advisers they succeed.” &nbsp;— Proverbs 15:22
+          “Plans fail for lack of counsel, but with many advisers they succeed.” - Proverbs 15:22
         </div>
       </div>
     </footer>
@@ -1071,7 +1071,7 @@ function FooterLink({ children, href, to, onClick }) {
 }
 
 /* ----------------------------------------------------------------
-   GREETING — based on hour
+   GREETING, based on hour
    ---------------------------------------------------------------- */
 function greeting(date = new Date()) {
   const h = date.getHours();

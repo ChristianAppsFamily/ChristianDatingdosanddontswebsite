@@ -1,4 +1,4 @@
-/* dashboard.jsx — logged-in community + daily word
+/* dashboard.jsx, logged-in community + daily word
    Two variants:
      - premium (full access)
      - trial-expired (thread frosted, overlay)
@@ -39,7 +39,7 @@ function DashboardPage({ user, mode, posts, onReact, onReply, onReplyReact, onSu
           marginTop: 36,
           alignItems: 'flex-start',
         }} className="dashboard-grid">
-          {/* MAIN — community thread */}
+          {/* MAIN, community thread */}
           <section style={{ minWidth: 0 }}>
             <ThreadHeader />
             <FilterBar value={filter} onChange={setFilter} />
@@ -125,7 +125,7 @@ function Greeting({ user, expired, onSubscribe }) {
         }}>
           You're walking through{' '}
           <StageTag stage={user.stage} />
-          {' '}— {STAGES[user.stage].note.toLowerCase()}.
+          {' '}· {STAGES[user.stage].note.toLowerCase()}.
         </p>
       </div>
       {expired && (
@@ -202,7 +202,7 @@ function EmptyThread({ stage }) {
 }
 
 /* ----------------------------------------------------------------
-   DAILY WORD CARD — never gated
+   DAILY WORD CARD, never gated
    ---------------------------------------------------------------- */
 function DailyWordCard({ word }) {
   return (
@@ -315,7 +315,7 @@ function WeeklyPromptCard({ prompt, stage }) {
 }
 
 /* ----------------------------------------------------------------
-   QUIET PROMPT — a smaller "right now" widget
+   QUIET PROMPT, a smaller "right now" widget
    ---------------------------------------------------------------- */
 function QuietPromptCard() {
   return (
@@ -327,7 +327,7 @@ function QuietPromptCard() {
       <div className="serif" style={{
         fontSize: 16, fontStyle: 'italic', color: 'var(--ink-soft)', lineHeight: 1.5,
       }}>
-        Before you scroll the Wall — name one person to pray for by name, and pause.
+        Before you scroll the Wall. Name one person to pray for by name, and pause.
       </div>
     </div>
   );
@@ -339,7 +339,7 @@ function FaithLine() {
       fontSize: 13, fontStyle: 'italic', color: 'var(--ink-mute)',
       textAlign: 'center', padding: '6px 8px', lineHeight: 1.5,
     }}>
-      “Not by might, nor by power, but by my Spirit.”<br />— Zechariah 4:6
+      “Not by might, nor by power, but by my Spirit.”, Zechariah 4:6
     </div>
   );
 }
@@ -392,7 +392,7 @@ function TrialExpiredOverlay({ onSubscribe }) {
           Join the community to keep reading the Wall, posting prayers, and praying with believers walking your stage.
         </p>
         <div style={{ display: 'flex', gap: 10, justifyContent: 'center', flexWrap: 'wrap' }}>
-          <button className="btn btn-primary" onClick={onSubscribe}>Subscribe — $89/year</button>
+          <button className="btn btn-primary" onClick={onSubscribe}>Subscribe for $89/year</button>
           <button className="btn btn-ghost">$12.99/month</button>
         </div>
         <div style={{

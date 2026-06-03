@@ -1,4 +1,4 @@
-/* onboarding.jsx — single screen, 2x2 stage selection */
+/* onboarding.jsx, single screen, 2x2 stage selection */
 
 function OnboardingPage({ onComplete, onNav }) {
   const [selected, setSelected] = useState(null);
@@ -171,7 +171,7 @@ function MinimalNav({ step, totalSteps, onNav }) {
 }
 
 /* ----------------------------------------------------------------
-   SIGNUP — very light form to bridge landing -> onboarding
+   SIGNUP, very light form to bridge landing -> onboarding
    ---------------------------------------------------------------- */
 function SignupPage({ onComplete, onNav, mode = 'signup' }) {
   const [name, setName] = useState('');
@@ -352,10 +352,10 @@ function SignupPage({ onComplete, onNav, mode = 'signup' }) {
               fontWeight: 500, color: 'var(--ink)', letterSpacing: '-0.012em', fontStyle: 'italic',
               textWrap: 'balance',
             }}>
-              “Single brothers — stop praying for a wife while you're still avoiding the work of becoming a husband. The waiting is the workshop.”
+              “Single brothers, stop praying for a wife while you're still avoiding the work of becoming a husband. The waiting is the workshop.”
             </blockquote>
             <div style={{ fontSize: 14, color: 'var(--ink-mute)' }}>
-              <span style={{ fontWeight: 600, color: 'var(--ink)' }}>Tomás</span> — California · Seeking
+              <span style={{ fontWeight: 600, color: 'var(--ink)' }}>Tomás</span> · California · Seeking
             </div>
             <div style={{
               marginTop: 28, paddingTop: 24, borderTop: '1px solid var(--line)',

@@ -1,4 +1,4 @@
-/* landing.jsx — public-facing landing page with hero variations */
+/* landing.jsx, public-facing landing page with hero variations */
 
 function LandingPage({ tweaks, onNav, demoPosts }) {
   return (
@@ -17,7 +17,7 @@ function LandingPage({ tweaks, onNav, demoPosts }) {
 }
 
 /* ----------------------------------------------------------------
-   HERO — three layout variants via tweak
+   HERO, three layout variants via tweak
    ---------------------------------------------------------------- */
 function Hero({ variant = 'centered', onNav }) {
   if (variant === 'asymmetric') return <HeroAsymmetric onNav={onNav} />;
@@ -61,7 +61,7 @@ function HeroSubhead({ wide = false }) {
       maxWidth: wide ? 620 : 560, marginTop: 0, marginBottom: 32,
       textWrap: 'pretty',
     }}>
-      A daily word, a weekly question, and a quiet wall of believers walking through seeking, dating, engagement, and starting over — together.
+      A daily word, a weekly question, and a quiet wall of believers walking through seeking, dating, engagement, and starting over, together.
     </p>
   );
 }
@@ -137,7 +137,7 @@ function HeroAsymmetric({ onNav }) {
 function HeroStack() {
   // Layered preview of 3 community posts as a visual
   const samples = [
-    { name: 'Marcus', location: 'Texas', stage: 'seeking', body: "Praying for discernment — 3 months in and I want to honor Him either way." },
+    { name: 'Marcus', location: 'Texas', stage: 'seeking', body: "Praying for discernment. Three months in and I want to honor Him either way." },
     { name: 'Diane', location: 'Georgia', stage: 'starting', body: "Finally had the boundary conversation. He gave me the words." },
     { name: 'Daniel', location: 'NC', stage: 'engaged', body: "She said yes. Glory to God." },
   ];
@@ -176,7 +176,7 @@ function MiniPost({ p, reactions, highlight }) {
       border: highlight ? '1.5px solid rgba(200, 98, 42, 0.25)' : 'none',
     }}>
       <div style={{ fontSize: 13, color: 'var(--ink-mute)', marginBottom: 8 }}>
-        <span style={{ fontWeight: 600, color: 'var(--ink)' }}>{p.name}</span> — {p.location}
+        <span style={{ fontWeight: 600, color: 'var(--ink)' }}>{p.name}</span> · {p.location}
       </div>
       <div style={{ display: 'flex', gap: 6, marginBottom: 10 }}>
         <CategoryTag kind="prayer" />
@@ -290,7 +290,7 @@ function HeroBackdrop({ strong = false }) {
 }
 
 /* ----------------------------------------------------------------
-   PREVIEW SECTION — frosted/blurred community thread + "Join to read"
+   PREVIEW SECTION, frosted/blurred community thread + "Join to read"
    ---------------------------------------------------------------- */
 function PreviewSection({ demoPosts, onNav }) {
   return (
@@ -371,7 +371,7 @@ function SectionHeading({ eyebrow, title, sub, align = 'center' }) {
 }
 
 /* ----------------------------------------------------------------
-   FEATURES — 3 highlights
+   FEATURES, 3 highlights
    ---------------------------------------------------------------- */
 function FeaturesSection() {
   const features = [
@@ -388,7 +388,7 @@ function FeaturesSection() {
     {
       icon: <IconStage />,
       title: 'Stage-aware',
-      body: 'Seeking, dating, engaged, or starting over — filter to the believers walking the same road you are.',
+      body: 'Seeking, dating, engaged, or starting over, and filter to the believers walking the same road you are.',
     },
   ];
   return (
@@ -459,7 +459,7 @@ function IconStage() {
 }
 
 /* ----------------------------------------------------------------
-   DAILY WORD PREVIEW — between Features and Pricing
+   DAILY WORD PREVIEW, between Features and Pricing
    ---------------------------------------------------------------- */
 function DailyWordPreviewSection({ onNav }) {
   const day = Math.floor(Date.now() / 86400000);
@@ -507,7 +507,7 @@ function DailyWordPreviewSection({ onNav }) {
               color: 'var(--ink-soft)',
               lineHeight: 1.65,
             }}>
-              A short scripture, devotional, or piece of wisdom — chosen for the season you're actually in. Always free. Never gated.
+              A short scripture, devotional, or piece of wisdom, chosen for the season you're actually in. Always free. Never gated.
             </p>
             <p className="serif" style={{
               marginTop: 10,
@@ -596,7 +596,7 @@ function PricingSection({ onNav }) {
         <SectionHeading
           eyebrow="Pricing"
           title="Less than a coffee. Honest pricing."
-          sub="A 7-day free trial. Cancel anytime. The Daily Word is always visible — we never gate scripture."
+          sub="A 7-day free trial. Cancel anytime. The Daily Word is always visible. We never gate scripture."
         />
         <div style={{
           marginTop: 48,
@@ -635,13 +635,13 @@ function ShareWithFriend() {
   const handleShare = async () => {
     const url = 'https://christiandatingdosanddonts.com';
     const title = "Christian Dating Do's and Don'ts";
-    const text = 'Found this faith-based community for Christians navigating dating — thought you might appreciate it.';
+    const text = 'Found this faith-based community for Christians navigating dating, and thought you might appreciate it.';
 
     if (navigator.share) {
       try {
         await navigator.share({ title, text, url });
       } catch (e) {
-        // user dismissed share sheet — no-op
+        // user dismissed share sheet, no-op
       }
     } else {
       try {

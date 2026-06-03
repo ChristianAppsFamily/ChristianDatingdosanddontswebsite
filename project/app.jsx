@@ -1,4 +1,4 @@
-/* app.jsx — root app, routing + tweak panel */
+/* app.jsx, root app, routing + tweak panel */
 
 const { useState: useAppState, useEffect: useAppEffect, useCallback: useAppCallback } = React;
 
@@ -63,7 +63,7 @@ function App() {
   const [user, setUser] = useState(null);
   const [trialMode, setTrialMode] = useState(tweaks.trialMode || 'premium');
 
-  // posts state — local, mutable
+  // posts state, local, mutable
   const [posts, setPosts] = useState(() => SEED_POSTS.map(p => ({ ...p, reactions: { ...p.reactions } })));
 
   // pending signup info between signup & onboarding
@@ -100,7 +100,7 @@ function App() {
     let active = true;
 
     (async () => {
-      // Google OAuth return — tokens in hash, ?code=, or redirect from /auth/callback
+      // Google OAuth return, tokens in hash, ?code=, or redirect from /auth/callback
       if (isOAuthCallbackUrl()) {
         const params = new URLSearchParams(window.location.search);
         const oauthResult = await handleOAuthCallback();
@@ -136,7 +136,7 @@ function App() {
       }
       await reloadPosts(profile?.id || null);
 
-      // Returning from Stripe Checkout — give the webhook a moment, then refresh.
+      // Returning from Stripe Checkout, give the webhook a moment, then refresh.
       const params = new URLSearchParams(window.location.search);
       if (params.get('checkout') === 'success') {
         setTimeout(async () => {

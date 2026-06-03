@@ -1,4 +1,4 @@
-/* config.jsx — backend wiring config + Supabase client + auth/payment helpers
+/* config.jsx, backend wiring config + Supabase client + auth/payment helpers
 
    ─────────────────────────────────────────────────────────────────────────
    👉 FILL IN YOUR REAL CREDENTIALS BELOW.
@@ -51,7 +51,7 @@ if (isSupabaseConfigured() && typeof window !== 'undefined' && window.supabase) 
 }
 
 /* ----------------------------------------------------------------
-   TIME — turn a stored timestamp into the "3 hours ago" style string
+   TIME, turn a stored timestamp into the "3 hours ago" style string
    the cards already render. Keeps the existing visual language.
    ---------------------------------------------------------------- */
 function timeAgo(input) {
@@ -71,7 +71,7 @@ function timeAgo(input) {
 }
 
 /* ----------------------------------------------------------------
-   AUTH — thin wrappers around Supabase Auth.
+   AUTH, thin wrappers around Supabase Auth.
    `profileFromRow` maps a public.users row → the shape the UI expects.
    ---------------------------------------------------------------- */
 function profileFromRow(row, authUser) {
@@ -119,7 +119,7 @@ async function signOutUser() {
   try { await sb.auth.signOut(); } catch (e) { console.error('[auth] signOut', e); }
 }
 
-/* Google OAuth — redirect target must match Supabase Auth redirect allow-list. */
+/* Google OAuth, redirect target must match Supabase Auth redirect allow-list. */
 function getOAuthRedirectUrl() {
   return window.location.origin + '/auth/callback';
 }
@@ -133,7 +133,7 @@ async function signInWithGoogle() {
   if (error) throw error;
 }
 
-/* Insert-only upsert for Google users — never overwrite stage/plan on return visits. */
+/* Insert-only upsert for Google users, never overwrite stage/plan on return visits. */
 async function upsertGoogleUser(user) {
   if (!sb || !user?.id) return;
   const md = user.user_metadata || {};
@@ -191,7 +191,7 @@ async function loadCurrentProfile() {
   const { data: { user } } = await sb.auth.getUser();
   if (!user) return null;
   let row = await fetchUserRow(user.id);
-  // Trigger may not have populated yet on a brand-new account — backfill once.
+  // Trigger may not have populated yet on a brand-new account, backfill once.
   if (!row) {
     const md = user.user_metadata || {};
     await sb.from('users').upsert({
@@ -204,16 +204,16 @@ async function loadCurrentProfile() {
 }
 
 /* ----------------------------------------------------------------
-   STRIPE CHECKOUT — calls the `create-checkout-session` Edge Function,
+   STRIPE CHECKOUT, calls the `create-checkout-session` Edge Function,
    then redirects with Stripe.js. The webhook flips is_premium server-side.
    ---------------------------------------------------------------- */
 async function startCheckout(user, planOverride) {
   if (!isSupabaseConfigured() || !sb) {
-    console.warn('[stripe] Supabase not configured — skipping checkout.');
+    console.warn('[stripe] Supabase not configured, skipping checkout.');
     return false;
   }
   if (!isStripeConfigured()) {
-    console.warn('[stripe] Stripe not configured — skipping checkout.');
+    console.warn('[stripe] Stripe not configured, skipping checkout.');
     return false;
   }
   const plan = planOverride || user?.plan || 'annual';

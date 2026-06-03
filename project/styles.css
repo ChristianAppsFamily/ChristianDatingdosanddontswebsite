@@ -1,5 +1,5 @@
 /* ============================================================
-   Christian Dating Do's and Don'ts — design tokens + base
+   Christian Dating Do's and Don'ts - design tokens + base
    Warm, faith-forward. Cream & burnt orange. Serif headlines.
    ============================================================ */
 
@@ -13,7 +13,7 @@
   --white: #FFFFFF;
   --paper: #FBF7F1;
 
-  /* Burnt orange — primary */
+  /* Burnt orange - primary */
   --orange: #C8622A;
   --orange-deep: #A6501F;
   --orange-soft: #F2DCC6;        /* tag background */
@@ -75,7 +75,7 @@ a { color: inherit; }
 .serif { font-family: var(--serif); font-optical-sizing: auto; }
 .sans  { font-family: var(--sans); }
 
-/* Subtle paper grain — applied via overlay div in app */
+/* Subtle paper grain - applied via overlay div in app */
 .paper-grain {
   position: absolute; inset: 0; pointer-events: none;
   background-image:
@@ -140,7 +140,7 @@ a { color: inherit; }
 .pop-in  { animation: popIn 240ms cubic-bezier(0.34, 1.4, 0.64, 1.0) both; }
 .slide-up{ animation: slideUp 480ms cubic-bezier(0.2, 0.7, 0.2, 1.0) both; }
 
-/* Scrollbar — warm */
+/* Scrollbar - warm */
 ::-webkit-scrollbar { width: 10px; height: 10px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--cream-edge); border-radius: var(--r-pill); border: 2px solid var(--cream); }

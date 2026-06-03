@@ -1,4 +1,4 @@
-/* data.jsx — seed content for the community thread + daily word */
+/* data.jsx, seed content for the community thread + daily word */
 
 const SEED_POSTS = [
   {
@@ -13,13 +13,13 @@ const SEED_POSTS = [
     userReaction: null,
     replies: [
       { id: 'p1r1', name: 'Hannah', location: 'Texas', stage: 'engaged', time: '2h ago',
-        body: "Praying with you, Marcus. The fact that you're asking is the prayer. James 1:5 — He gives wisdom generously.",
+        body: "Praying with you, Marcus. The fact that you're asking is the prayer. James 1:5. He gives wisdom generously.",
         reactions: { praying: 8, with_you: 4, amen: 12 }, userReaction: null },
       { id: 'p1r2', name: 'Andre', location: 'Atlanta', stage: 'dating', time: '2h ago',
         body: "Brother, I went through the exact same season last year. What helped me: stop asking 'is this the one' and start asking 'is this who God is forming me alongside right now.' Different question, clearer answer.",
         reactions: { praying: 14, with_you: 22, amen: 31 }, userReaction: 'amen' },
       { id: 'p1r3', name: 'Joy', location: 'Houston', stage: 'starting', time: '1h ago',
-        body: "Walk away looks like grief at first. Go forward looks like peace under the pressure. Pray for the difference between relief and peace — they feel similar but aren't.",
+        body: "Walk away looks like grief at first. Go forward looks like peace under the pressure. Pray for the difference between relief and peace. They feel similar but aren't.",
         reactions: { praying: 19, with_you: 7, amen: 26 }, userReaction: null },
       { id: 'p1r4', name: 'Sam', location: 'Dallas', stage: 'seeking', time: '38m ago',
         body: "Lifting you up tonight.", reactions: { praying: 3, with_you: 1, amen: 0 }, userReaction: null },
@@ -76,12 +76,12 @@ const SEED_POSTS = [
     time: 'Yesterday',
     stage: 'dating',
     category: 'prayer',
-    body: "We've been dating 8 months and I love him. Pray for our purity and that we honor God with our boundaries — not because of fear, but because of love.",
+    body: "We've been dating 8 months and I love him. Pray for our purity and that we honor God with our boundaries, not because of fear, but because of love.",
     reactions: { praying: 56, with_you: 22, amen: 19 },
     userReaction: null,
     replies: [
       { id: 'p4r1', name: 'Naomi', location: 'Boston', stage: 'engaged', time: '20h ago',
-        body: "'Not because of fear, but because of love' — that reframe carried us all the way to our wedding. Praying with you, Priya.",
+        body: "'Not because of fear, but because of love.' That reframe carried us all the way to our wedding. Praying with you, Priya.",
         reactions: { praying: 8, with_you: 14, amen: 22 }, userReaction: 'amen' },
     ],
   },
@@ -92,7 +92,7 @@ const SEED_POSTS = [
     time: '2 days ago',
     stage: 'seeking',
     category: 'wisdom',
-    body: "Single brothers — stop praying for a wife while you're still avoiding the work of becoming a husband. The waiting is the workshop. I had to learn this the hard way.",
+    body: "Single brothers, stop praying for a wife while you're still avoiding the work of becoming a husband. The waiting is the workshop. I had to learn this the hard way.",
     reactions: { praying: 12, with_you: 47, amen: 91 },
     userReaction: 'amen',
     replies: [
@@ -135,18 +135,18 @@ const SEED_POSTS = [
     time: '3 days ago',
     stage: 'engaged',
     category: 'praise',
-    body: "She said yes. We've prayed about this for over a year and waited to date the right way. Glory to God. Pre-marital counseling starts next week — any verses you'd send a future husband?",
+    body: "She said yes. We've prayed about this for over a year and waited to date the right way. Glory to God. Pre-marital counseling starts next week. Any verses you'd send a future husband?",
     reactions: { praying: 41, with_you: 67, amen: 124 },
     userReaction: null,
     replies: [
       { id: 'p7r1', name: 'James', location: 'Illinois', stage: 'engaged', time: '2d ago',
-        body: "Ephesians 5:25-33 — slowly. Not as duty, but as the picture of Christ. Congratulations brother.",
+        body: "Ephesians 5:25-33. Slowly. Not as duty, but as the picture of Christ. Congratulations brother.",
         reactions: { praying: 6, with_you: 18, amen: 42 }, userReaction: 'amen' },
       { id: 'p7r2', name: 'Marcus', location: 'Texas', stage: 'seeking', time: '2d ago',
         body: "Glory to God. Praying for the counseling season.",
         reactions: { praying: 4, with_you: 11, amen: 16 }, userReaction: null },
       { id: 'p7r3', name: 'Esther', location: 'London', stage: 'dating', time: '1d ago',
-        body: "1 Corinthians 13 — but read it as a description of God's love, not a checklist of yours. That's the verse that changed us.",
+        body: "1 Corinthians 13, but read it as a description of God's love, not a checklist of yours. That's the verse that changed us.",
         reactions: { praying: 3, with_you: 9, amen: 28 }, userReaction: null },
     ],
   },
@@ -199,32 +199,32 @@ const SEED_POSTS = [
   },
 ];
 
-/* Daily Word entries — rotate by day of year so it feels fresh */
+/* Daily Word entries, rotate by day of year so it feels fresh */
 const DAILY_WORDS = [
   {
     type: 'VERSE',
     body: "“Be still, and know that I am God; I will be exalted among the nations, I will be exalted in the earth.”",
     reference: 'Psalm 46:10',
     translation: 'NIV',
-    reflection: "Stillness is not the absence of doing. It is the presence of trust — the choice to stop performing for an answer and let Him be God in the waiting.",
+    reflection: "Stillness is not the absence of doing. It is the presence of trust, the choice to stop performing for an answer and let Him be God in the waiting.",
   },
   {
     type: 'VERSE',
     body: "“Above all else, guard your heart, for everything you do flows from it.”",
     reference: 'Proverbs 4:23',
     translation: 'NIV',
-    reflection: "Guarding is active. It is not a wall — it is a watchful gate. What you let through becomes what flows out into the relationships you build.",
+    reflection: "Guarding is active. It is not a wall. It is a watchful gate. What you let through becomes what flows out into the relationships you build.",
   },
   {
     type: 'DEVOTIONAL',
     body: "Love is patient because love is sure. It is not in a hurry to prove itself. If you find yourself rushing to certainty, ask: am I trusting God, or trying to manage Him?",
-    reference: '1 Corinthians 13 — meditation',
+    reference: '1 Corinthians 13, meditation',
     translation: 'Reflection',
     reflection: "Today, name one place you've been impatient with God's timing. Bring it to Him plainly. He can hold honesty better than you can hold pretending.",
   },
   {
     type: 'WISDOM',
-    body: "The right person at the wrong time is the wrong person. God's gifts arrive with His timing already attached. Waiting is not delay — it is the gift before the gift.",
+    body: "The right person at the wrong time is the wrong person. God's gifts arrive with His timing already attached. Waiting is not delay. It is the gift before the gift.",
     reference: 'A pastoral note',
     translation: 'Devotional',
     reflection: "Where are you tempted to force a 'yes' you sense is a 'not yet'?",
@@ -235,7 +235,7 @@ const DAILY_WORDS = [
 const WEEKLY_PROMPTS = {
   seeking: {
     title: 'This week\'s prompt',
-    question: 'What would your life look like if you trusted God\'s timing for one full month — with no swiping, no checking?',
+    question: 'What would your life look like if you trusted God\'s timing for one full month, with no swiping, no checking?',
   },
   dating: {
     title: 'This week\'s prompt',
@@ -243,7 +243,7 @@ const WEEKLY_PROMPTS = {
   },
   engaged: {
     title: 'This week\'s prompt',
-    question: 'What does it mean to lead a household together — not above, not behind, but beside?',
+    question: 'What does it mean to lead a household together, not above, not behind, but beside?',
   },
   starting: {
     title: 'This week\'s prompt',
