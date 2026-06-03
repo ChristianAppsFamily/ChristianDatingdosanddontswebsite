@@ -8,6 +8,7 @@ function LandingPage({ tweaks, onNav, demoPosts }) {
       <Hero variant={tweaks.heroLayout} onNav={onNav} />
       <PreviewSection demoPosts={demoPosts} onNav={onNav} />
       <FeaturesSection />
+      <DailyWordPreviewSection onNav={onNav} />
       <PricingSection onNav={onNav} />
       <ClosingCTA onNav={onNav} />
       <Footer onNav={onNav} />
@@ -454,6 +455,134 @@ function IconStage() {
       <path d="M4 13 L13 4 L22 13 L13 22 Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
       <circle cx="13" cy="13" r="2.5" fill="currentColor" />
     </svg>
+  );
+}
+
+/* ----------------------------------------------------------------
+   DAILY WORD PREVIEW — between Features and Pricing
+   ---------------------------------------------------------------- */
+function DailyWordPreviewSection({ onNav }) {
+  const day = Math.floor(Date.now() / 86400000);
+  const todayWord = DAILY_WORDS[day % DAILY_WORDS.length];
+
+  return (
+    <section
+      id="daily-word-preview"
+      className="daily-word-preview"
+      style={{
+        width: '100%',
+        background: 'var(--cream-deep)',
+        padding: '80px 0',
+        borderTop: '1px solid var(--line)',
+        borderBottom: '1px solid var(--line)',
+      }}
+    >
+      <div className="container">
+        <div className="daily-word-preview-grid" style={{
+          display: 'grid',
+          gridTemplateColumns: 'minmax(0, 0.4fr) minmax(0, 0.6fr)',
+          gap: 64,
+          maxWidth: 1100,
+          margin: '0 auto',
+          alignItems: 'center',
+        }}>
+          <div className="daily-word-preview-intro">
+            <div className="eyebrow">DAILY WORD</div>
+            <h2 className="serif" style={{
+              margin: '14px 0 0',
+              fontSize: 'clamp(32px, 3.8vw, 48px)',
+              fontWeight: 600,
+              letterSpacing: '-0.02em',
+              color: 'var(--ink)',
+              lineHeight: 1.1,
+              textWrap: 'balance',
+            }}>
+              A new word every morning.
+            </h2>
+            <p style={{
+              marginTop: 14,
+              maxWidth: 360,
+              fontFamily: 'var(--sans)',
+              fontSize: 16.5,
+              color: 'var(--ink-soft)',
+              lineHeight: 1.65,
+            }}>
+              A short scripture, devotional, or piece of wisdom — chosen for the season you're actually in. Always free. Never gated.
+            </p>
+            <p className="serif" style={{
+              marginTop: 10,
+              fontSize: 14,
+              fontStyle: 'italic',
+              color: 'var(--ink-mute)',
+            }}>
+              The Daily Word is visible to everyone. No account required.
+            </p>
+            <button
+              type="button"
+              className="btn btn-primary daily-word-preview-cta"
+              style={{ marginTop: 28 }}
+              onClick={() => onNav('daily-word')}
+            >
+              Read Today's Daily Word
+            </button>
+            <p style={{
+              marginTop: 12,
+              fontSize: 13,
+              color: 'var(--ink-mute)',
+            }}>
+              A new word posts every morning.
+            </p>
+          </div>
+
+          <div className="daily-word-preview-card-col">
+            <div className="daily-word-preview-card-wrap" style={{
+              maxWidth: 480,
+              marginLeft: 'auto',
+              transform: 'rotate(1.2deg)',
+              boxShadow: 'var(--shadow-lift)',
+              borderRadius: 'var(--r-xl)',
+              overflow: 'hidden',
+              pointerEvents: 'none',
+            }}>
+              <DailyWordCard word={todayWord} />
+            </div>
+            <p style={{
+              marginTop: 14,
+              fontSize: 12.5,
+              color: 'var(--ink-mute)',
+              textAlign: 'center',
+            }}>
+              Posted every morning · Free to read · Grounded in Scripture
+            </p>
+          </div>
+        </div>
+      </div>
+      <style>{`
+        @media (max-width: 768px) {
+          .daily-word-preview-grid {
+            grid-template-columns: 1fr !important;
+            gap: 40px !important;
+          }
+          .daily-word-preview-intro {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+          }
+          .daily-word-preview-intro p {
+            max-width: 100% !important;
+          }
+          .daily-word-preview-cta {
+            width: 100%;
+          }
+          .daily-word-preview-card-wrap {
+            max-width: 100% !important;
+            margin-left: 0 !important;
+            transform: none !important;
+          }
+        }
+      `}</style>
+    </section>
   );
 }
 
