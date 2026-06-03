@@ -929,7 +929,31 @@ function MenuItem({ children, onClick }) {
 /* ----------------------------------------------------------------
    FOOTER
    ---------------------------------------------------------------- */
-function Footer() {
+function Footer({ onNav, user }) {
+  const nav = onNav || window.cdddNavigate;
+  const currentUser = user ?? window.cdddUser ?? null;
+
+  const goPricing = (e) => {
+    if (e) e.preventDefault();
+    const path = window.location.pathname.replace(/\/$/, '') || '/';
+    const onLanding = path === '/' && window.cdddScreen === 'landing';
+    if (onLanding) {
+      document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      window.location.href = '/#pricing';
+    }
+  };
+
+  const goWall = (e) => {
+    if (e) e.preventDefault();
+    if (currentUser) {
+      window.cdddScrollToWall = true;
+      nav?.('dashboard');
+    } else {
+      nav?.('signup');
+    }
+  };
+
   return (
     <footer style={{
       borderTop: '1px solid var(--line)',
@@ -941,27 +965,26 @@ function Footer() {
         gap: 32, flexWrap: 'wrap',
       }}>
         <div style={{ maxWidth: 360 }}>
-          <Logo />
+          <Logo onClick={() => nav?.('landing')} />
           <p style={{ marginTop: 14, color: 'var(--ink-mute)', fontSize: 14, lineHeight: 1.6 }}>
             A small, faith-forward community for Christians navigating dating, engagement, and starting over. Honest. Anonymous when it needs to be. Always grounded in the Word.
           </p>
         </div>
         <FooterColumn title="Community">
-          <FooterLink>Daily Word</FooterLink>
-          <FooterLink>The Wall</FooterLink>
-          <FooterLink>Weekly Prompt</FooterLink>
-          <FooterLink>Library</FooterLink>
+          <FooterLink onClick={() => nav?.('daily-word')}>Daily Word</FooterLink>
+          <FooterLink onClick={goWall}>The Wall</FooterLink>
         </FooterColumn>
         <FooterColumn title="About">
-          <FooterLink>Our story</FooterLink>
-          <FooterLink>Statement of faith</FooterLink>
-          <FooterLink>Pricing</FooterLink>
-          <FooterLink>Contact</FooterLink>
+          <FooterLink onClick={() => nav?.('our-story')}>Our Story</FooterLink>
+          <FooterLink onClick={() => nav?.('what-we-believe')}>What We Believe</FooterLink>
+          <FooterLink onClick={() => nav?.('the-gospel')}>The Gospel</FooterLink>
+          <FooterLink onClick={goPricing}>Pricing</FooterLink>
+          <FooterLink href="mailto:ChristianAppEmpire@gmail.com">Contact</FooterLink>
         </FooterColumn>
-        <FooterColumn title="Quiet">
-          <FooterLink>Privacy</FooterLink>
-          <FooterLink>Terms</FooterLink>
-          <FooterLink>Community rules</FooterLink>
+        <FooterColumn title="Legal">
+          <FooterLink onClick={() => nav?.('privacy')}>Privacy</FooterLink>
+          <FooterLink onClick={() => nav?.('terms')}>Terms</FooterLink>
+          <FooterLink onClick={() => nav?.('community-rules')}>Community Rules</FooterLink>
         </FooterColumn>
       </div>
       <div className="container" style={{
@@ -986,11 +1009,22 @@ function FooterColumn({ title, children }) {
     </div>
   );
 }
-function FooterLink({ children }) {
+function FooterLink({ children, href, onClick }) {
+  if (href) {
+    return (
+      <a href={href} style={{
+        color: 'var(--ink-soft)', fontSize: 14, textDecoration: 'none',
+        transition: 'color 120ms ease',
+      }}
+        onMouseEnter={e => e.currentTarget.style.color = 'var(--orange)'}
+        onMouseLeave={e => e.currentTarget.style.color = 'var(--ink-soft)'}
+      >{children}</a>
+    );
+  }
   return (
-    <a href="#" style={{
+    <a href="#" onClick={(e) => { e.preventDefault(); onClick?.(e); }} style={{
       color: 'var(--ink-soft)', fontSize: 14, textDecoration: 'none',
-      transition: 'color 120ms ease',
+      transition: 'color 120ms ease', cursor: 'pointer',
     }}
       onMouseEnter={e => e.currentTarget.style.color = 'var(--orange)'}
       onMouseLeave={e => e.currentTarget.style.color = 'var(--ink-soft)'}

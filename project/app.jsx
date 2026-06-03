@@ -1,6 +1,6 @@
 /* app.jsx — root app, routing + tweak panel */
 
-const { useState: useAppState, useEffect: useAppEffect } = React;
+const { useState: useAppState, useEffect: useAppEffect, useCallback: useAppCallback } = React;
 
 const DEFAULT_TWEAKS = /*EDITMODE-BEGIN*/{
   "heroLayout": "asymmetric",
@@ -8,12 +8,58 @@ const DEFAULT_TWEAKS = /*EDITMODE-BEGIN*/{
   "trialMode": "premium"
 }/*EDITMODE-END*/;
 
+const SCREEN_PATHS = {
+  landing: '/',
+  signup: '/signup',
+  login: '/login',
+  onboarding: '/onboarding',
+  dashboard: '/dashboard',
+  'daily-word': '/daily-word',
+  'our-story': '/our-story',
+  'what-we-believe': '/what-we-believe',
+  'the-gospel': '/the-gospel',
+  privacy: '/privacy',
+  terms: '/terms',
+  'community-rules': '/community-rules',
+};
+
+const PATH_TO_SCREEN = Object.fromEntries(
+  Object.entries(SCREEN_PATHS).map(([screen, path]) => [path, screen])
+);
+
+function screenFromPathname(pathname) {
+  const path = (pathname || '/').replace(/\/$/, '') || '/';
+  return PATH_TO_SCREEN[path] || null;
+}
+
+function pathFromScreen(screen) {
+  return SCREEN_PATHS[screen] || '/';
+}
+
+function getInitialScreen() {
+  return screenFromPathname(window.location.pathname) || DEFAULT_TWEAKS.startScreen || 'landing';
+}
+
+function scrollToWallThread() {
+  setTimeout(() => {
+    const headings = [...document.querySelectorAll('h2.serif')];
+    const wall = headings.find(h => h.textContent.trim().startsWith('The Wall'));
+    wall?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 150);
+}
+
+function scrollToPricing() {
+  setTimeout(() => {
+    document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' });
+  }, 120);
+}
+
 function App() {
   // tweaks
   const [tweaks, setTweak] = useTweaks(DEFAULT_TWEAKS);
 
   // routing
-  const [screen, setScreen] = useState(tweaks.startScreen || 'landing');
+  const [screen, setScreen] = useState(getInitialScreen);
   const [user, setUser] = useState(null);
   const [trialMode, setTrialMode] = useState(tweaks.trialMode || 'premium');
 
@@ -23,8 +69,10 @@ function App() {
   // pending signup info between signup & onboarding
   const [signupInfo, setSignupInfo] = useState(null);
 
-  // sync from tweaks
+  // sync from tweaks (respect URL routes when they match the active screen)
   useAppEffect(() => {
+    const urlScreen = screenFromPathname(window.location.pathname);
+    if (urlScreen && urlScreen === screen) return;
     if (tweaks.startScreen && tweaks.startScreen !== screen) {
       setScreen(tweaks.startScreen);
       if (tweaks.startScreen === 'dashboard' && !user) {
@@ -121,7 +169,7 @@ function App() {
   }, []);
 
   // navigation
-  const navigate = (to) => {
+  const navigate = useAppCallback((to, opts = {}) => {
     if (to === 'landing') {
       // logout when going home
       if (user) {
@@ -131,8 +179,58 @@ function App() {
     }
     setScreen(to);
     setTweak('startScreen', to);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+
+    const path = pathFromScreen(to);
+    const hash = opts.hash || (to === 'landing' && window.location.hash === '#pricing' ? '#pricing' : '');
+    const url = path + hash;
+    if (opts.replace) {
+      window.history.replaceState({ screen: to }, '', url);
+    } else {
+      window.history.pushState({ screen: to }, '', url);
+    }
+
+    if (to === 'landing' && (hash === '#pricing' || window.location.hash === '#pricing')) {
+      scrollToPricing();
+    } else if (to === 'dashboard' && window.cdddScrollToWall) {
+      window.cdddScrollToWall = false;
+      scrollToWallThread();
+    } else if (to !== 'dashboard') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [user, setTweak]);
+
+  useAppEffect(() => {
+    window.cdddNavigate = navigate;
+    window.cdddUser = user;
+    window.cdddScreen = screen;
+  }, [navigate, user, screen]);
+
+  // Browser back/forward
+  useAppEffect(() => {
+    const onPop = () => {
+      const next = screenFromPathname(window.location.pathname) || 'landing';
+      setScreen(next);
+      setTweak('startScreen', next);
+      if (window.location.hash === '#pricing' && next === 'landing') scrollToPricing();
+      if (next === 'dashboard' && window.cdddScrollToWall) {
+        window.cdddScrollToWall = false;
+        scrollToWallThread();
+      }
+    };
+    window.addEventListener('popstate', onPop);
+    return () => window.removeEventListener('popstate', onPop);
+  }, [setTweak]);
+
+  // Deep link: /#pricing on first load
+  useAppEffect(() => {
+    if (window.location.hash !== '#pricing') return;
+    const pathScreen = screenFromPathname(window.location.pathname);
+    if (pathScreen && pathScreen !== 'landing') {
+      window.location.href = '/#pricing';
+      return;
+    }
+    if (screen === 'landing') scrollToPricing();
+  }, [screen]);
 
   const handleSignup = async (info) => {
     setSignupInfo(info);
@@ -333,6 +431,20 @@ function App() {
   let view;
   if (screen === 'landing') {
     view = <LandingPage tweaks={tweaks} onNav={navigate} demoPosts={posts} />;
+  } else if (screen === 'daily-word') {
+    view = <DailyWordPage user={user} onNav={navigate} />;
+  } else if (screen === 'our-story') {
+    view = <OurStoryPage user={user} onNav={navigate} />;
+  } else if (screen === 'what-we-believe') {
+    view = <WhatWeBelievePage user={user} onNav={navigate} />;
+  } else if (screen === 'the-gospel') {
+    view = <TheGospelPage user={user} onNav={navigate} />;
+  } else if (screen === 'privacy') {
+    view = <PrivacyPage user={user} onNav={navigate} />;
+  } else if (screen === 'terms') {
+    view = <TermsPage user={user} onNav={navigate} />;
+  } else if (screen === 'community-rules') {
+    view = <CommunityRulesPage user={user} onNav={navigate} />;
   } else if (screen === 'signup') {
     view = <SignupPage mode="signup" onComplete={handleSignup} onNav={navigate} />;
   } else if (screen === 'login') {
