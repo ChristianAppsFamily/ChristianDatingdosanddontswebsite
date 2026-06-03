@@ -17,7 +17,7 @@ const CONFIG = {
   STRIPE_ANNUAL_PRICE_ID:  'price_XXX_ANNUAL',        // ← Annual price ID
 
   // APP STORE
-  APP_STORE_URL: 'https://apps.apple.com/app/idYOUR_APP_ID', // ← App Store URL
+  APP_STORE_URL: 'https://apps.apple.com/us/app/christian-dating-dos-and-donts/id911295588',
 };
 
 /* True only once real Supabase credentials have been dropped in above.
