@@ -23,7 +23,8 @@
 .stage-dots span:first-child{margin-left:0}
 .hero-media{position:relative;padding-bottom:64px}
 .photo{position:relative;border-radius:var(--r-xl);overflow:hidden;background:var(--warm-200)}
-.photo-tag{position:absolute;top:14px;left:14px;z-index:2;font-size:11.5px;font-weight:700;color:var(--ink-900);background:rgba(255,251,247,.88);padding:5px 10px;border-radius:var(--r-full);pointer-events:none}
+.photo img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
+.photo-tag{position:absolute;top:14px;left:14px;z-index:2;font-size:11.5px;font-weight:700;color:var(--ink-900);background:rgba(255,255,255,.9);padding:5px 10px;border-radius:var(--r-full);pointer-events:none}
 .hero-photo{aspect-ratio:4/5}
 .hero-post{position:absolute;left:-56px;right:40px;bottom:0;background:var(--surface);border-radius:var(--r-lg);box-shadow:var(--e-2);border:1px solid var(--line)}
 .hero-post-label{display:flex;align-items:center;gap:8px;padding:14px 22px 0;font-size:12.5px;font-weight:700;color:var(--text-3)}
@@ -54,6 +55,8 @@
 .mk-head p{font-size:var(--fs-lead);line-height:1.6;color:var(--text-2);max-width:30em;justify-self:end}
 .feat{display:grid;gap:clamp(28px,4vw,56px);align-items:center;padding:clamp(28px,4vw,48px) 0;border-top:1px solid var(--line)}
 .feat-a{grid-template-columns:minmax(0,4fr) minmax(0,8fr)}
+.feat-visual{display:grid;gap:clamp(16px,2vw,24px)}
+.feat-photo{aspect-ratio:16/10;min-height:220px}
 .feat-pair{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(20px,3vw,32px);border-top:1px solid var(--line);padding-top:clamp(28px,4vw,48px)}
 .feat-num{font-family:var(--font-display);font-size:48px;line-height:1;color:var(--accent)}
 .feat h3,.feat-card h3{font-family:var(--font-display);font-weight:400;font-size:clamp(28px,2.6vw,38px);line-height:1.08;margin:18px 0 14px;letter-spacing:-.01em}
@@ -100,7 +103,7 @@
 .mk-cta .mk-mark::before{background:var(--ink-900)}
 .mk-cta h2{font-size:var(--fs-display-l);margin:24px 0 24px}
 .mk-cta p{font-size:var(--fs-lead);line-height:1.6;max-width:30em;margin-bottom:36px;color:var(--ink-900)}
-.cta-photo{aspect-ratio:1/1}
+.cta-photo{aspect-ratio:5/4}
 
 .mk-foot{padding:clamp(56px,6vw,88px) 0 40px}
 .foot-grid{display:grid;grid-template-columns:minmax(0,5fr) repeat(3,minmax(0,2fr));gap:40px}

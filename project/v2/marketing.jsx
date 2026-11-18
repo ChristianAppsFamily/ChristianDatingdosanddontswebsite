@@ -1,10 +1,6 @@
 /* marketing.jsx — landing page */
-function PhotoFrame({ label = 'D&D' }) {
-  return (
-    <div className="photo-frame" aria-hidden="true">
-      <span className="mark">{label}</span>
-    </div>
-  );
+function LifestylePhoto({ src, alt }) {
+  return <img src={src} alt={alt} loading="lazy" decoding="async" />;
 }
 
 function Landing({ onNav, posts }) {
@@ -53,7 +49,7 @@ function Hero({ onNav, post }) {
         <div className="hero-media">
           <div className="photo hero-photo">
             <span className="photo-tag">Illustrative photo</span>
-            <PhotoFrame />
+            <LifestylePhoto src="uploads/hero-friends.jpg" alt="Friends laughing together outdoors on a blanket" />
           </div>
           {post && (
             <div className="hero-post">
@@ -115,11 +111,17 @@ function Features({ posts }) {
             <h3>A Daily Word</h3>
             <p>A short scripture, devotional, or piece of wisdom — chosen for the season you're actually in.</p>
           </div>
-          <div className="stage-panel panel-gold">
-            <div className="word-preview">
-              <span className="type">{word.type}</span>
-              <blockquote>{word.body}</blockquote>
-              <p className="word-ref"><b>{word.reference}</b>{word.translation}</p>
+          <div className="feat-visual">
+            <div className="photo feat-photo">
+              <span className="photo-tag">Illustrative photo</span>
+              <LifestylePhoto src="uploads/feature-friends.jpg" alt="Two friends embracing in a sunlit field" />
+            </div>
+            <div className="stage-panel panel-gold">
+              <div className="word-preview">
+                <span className="type">{word.type}</span>
+                <blockquote>{word.body}</blockquote>
+                <p className="word-ref"><b>{word.reference}</b>{word.translation}</p>
+              </div>
             </div>
           </div>
         </div>
@@ -184,7 +186,7 @@ function FinalCTA({ onNav }) {
         </div>
         <div className="photo cta-photo">
           <span className="photo-tag">Illustrative photo</span>
-          <PhotoFrame />
+          <LifestylePhoto src="uploads/cta-gathering.jpg" alt="Friends sharing tea and laughing together" />
         </div>
       </div>
     </section>
@@ -251,4 +253,4 @@ function SiteFooter({ onNav }) {
   );
 }
 
-Object.assign(window, { Landing, SiteFooter, PhotoFrame });
+Object.assign(window, { Landing, SiteFooter, LifestylePhoto });
