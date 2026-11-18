@@ -33,7 +33,7 @@ function HeroEyebrow() {
       background: 'var(--orange-soft)', color: 'var(--orange-text)',
     }}>
       <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--orange)', animation: 'pulseDot 2s infinite' }} />
-      A small, faith-forward community
+      A small Christian community
     </div>
   );
 }
@@ -47,9 +47,9 @@ function HeroHeadline({ size = 'lg' }) {
       margin: '24px 0 18px', color: 'var(--ink)',
       textWrap: 'balance',
     }}>
-      You don't have to navigate <span style={{
+      Real people talking honestly about <span style={{
         fontStyle: 'italic', fontWeight: 500, color: 'var(--orange)',
-      }}>Christian dating</span> alone.
+      }}>dating and faith</span>.
     </h1>
   );
 }
@@ -61,7 +61,7 @@ function HeroSubhead({ wide = false }) {
       maxWidth: wide ? 620 : 560, marginTop: 0, marginBottom: 32,
       textWrap: 'pretty',
     }}>
-      A daily word, a weekly question, and a quiet wall of believers walking through seeking, dating, engagement, and starting over, together.
+      A verse every morning, a question every week, and believers who will pray for you and seek to encourage you.
     </p>
   );
 }
@@ -299,7 +299,7 @@ function PreviewSection({ demoPosts, onNav }) {
         <SectionHeading
           eyebrow="The Wall"
           title="The conversation is already happening."
-          sub="Real people, first names, sometimes a city. Anonymous when it needs to be. Always faith-forward."
+          sub="Real people. First names, sometimes a city. Anonymous when you need it. Built around Scripture."
         />
 
         <div style={{ position: 'relative', maxWidth: 720, margin: '40px auto 0' }}>
@@ -396,8 +396,8 @@ function FeaturesSection() {
       <div className="container">
         <SectionHeading
           eyebrow="What you get"
-          title="Three small things, done well."
-          sub="No swiping. No feeds. No algorithm. Just a daily anchor and a community that knows your stage."
+          title="Three things. That's it."
+          sub="No swiping. No feed. No matching. A daily verse and a community that knows your stage."
         />
         <div style={{
           marginTop: 56,
@@ -507,7 +507,7 @@ function DailyWordPreviewSection({ onNav }) {
               color: 'var(--ink-soft)',
               lineHeight: 1.65,
             }}>
-              A short scripture, devotional, or piece of wisdom, chosen for the season you're actually in. Always free. Never gated.
+              A short scripture, a short note, or a piece of wisdom chosen for where you are right now. Always free. Never gated.
             </p>
             <p className="serif" style={{
               marginTop: 10,
@@ -595,8 +595,8 @@ function PricingSection({ onNav }) {
       <div className="container">
         <SectionHeading
           eyebrow="Pricing"
-          title="Less than a coffee. Honest pricing."
-          sub="A 7-day free trial. Cancel anytime. The Daily Word is always visible. We never gate scripture."
+          title="$6.99 a month. Or $49 a year."
+          sub="7-day free trial. Cancel anytime. The Daily Word stays free. We do not gate Scripture."
         />
         <div style={{
           marginTop: 48,
@@ -635,7 +635,7 @@ function ShareWithFriend() {
   const handleShare = async () => {
     const url = 'https://christiandatingdosanddonts.com';
     const title = "Christian Dating Do's and Don'ts";
-    const text = 'Found this faith-based community for Christians navigating dating, and thought you might appreciate it.';
+    const text = 'Found this Christian dating community and thought you might appreciate it.';
 
     if (navigator.share) {
       try {
@@ -766,21 +766,21 @@ function ClosingCTA({ onNav }) {
       }}>
         <DecorCircleLg />
         <div className="eyebrow" style={{ color: 'rgba(255, 255, 255, 0.65)', position: 'relative' }}>
-          The hard road, walked together
+          Join the Table
         </div>
         <h2 className="serif" style={{
           margin: '16px auto 18px', fontSize: 'clamp(34px, 4vw, 56px)',
           fontWeight: 600, letterSpacing: '-0.02em', lineHeight: 1.05,
           maxWidth: 720, textWrap: 'balance', position: 'relative',
         }}>
-          You weren't meant to figure this out alone.
+          You don't have to do this alone.
         </h2>
         <p style={{
           maxWidth: 520, margin: '0 auto 28px',
           color: 'rgba(255, 255, 255, 0.78)', fontSize: 17, lineHeight: 1.55,
           position: 'relative',
         }}>
-          Seven days free. No swiping, no algorithm. Just the Word, a question, and the company of the saints.
+          Seven days free. A verse, a question, and people who will pray with you.
         </p>
         <div style={{ position: 'relative' }}>
           <button className="btn btn-primary btn-lg" onClick={() => onNav('signup')}>

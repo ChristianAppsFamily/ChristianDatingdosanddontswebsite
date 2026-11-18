@@ -194,10 +194,10 @@ function DailyWordPage({ user, onNav }) {
           </p>
         )}
         <div className="faith-card" style={{ marginTop: 48, textAlign: 'center' }}>
-          <p className="page-kicker">A word for every season.</p>
+          <p className="page-kicker">Daily Word</p>
           <h2 className="page-title" style={{ fontSize: 28, marginBottom: 14 }}>Get your daily word every morning.</h2>
           <p className="page-lead" style={{ margin: '0 auto 22px' }}>
-            Join a community of believers navigating dating, engagement, and starting over, together. Seven days free.
+            Join Christians in dating, engagement, and starting over. Seven days free.
           </p>
           <button className="btn btn-primary" onClick={() => onNav('signup')}>Join the community</button>
           <p style={{ margin: '14px 0 0', fontSize: 13, color: 'var(--text-3)' }}>$6.99/mo or $49/yr after your free trial.</p>
@@ -212,9 +212,9 @@ function OurStoryPage({ user, onNav }) {
   const paragraphs = [
     'We are Christian App Empire, a small, faith-rooted company founded by a married couple based in Los Angeles.',
     'We have been together for nearly twenty years. We have six kids. We have watched relationships begin in hope and grow into something lasting. We have also watched relationships we loved, whether friends, family, or church family, grow fragile and fall apart. We have been through seasons of our own that we did not expect and did not have a map for.',
-    'What we know from all of it is this: encouragement from community is not optional. It is essential. The people around you, the ones who have been where you are, who are honest about what it cost them, who will pray with you and not just advise you, matter more than any article, podcast, or algorithm ever could.',
-    'We also know we do not have all the answers. Nobody does. That is exactly why we built this.',
-    'Christian Dating Do\'s and Don\'ts is not a platform built by experts telling you what to do. It is a space where believers at every stage of the journey, whether seeking, dating, engaged, or starting over, can find a daily word, an honest question, and the company of people who are in it too.',
+    'What we know from all of it is this: people who have been where you are, who will tell you the truth and pray with you, matter more than another article or podcast.',
+    'We also know we do not have all the answers. Nobody does. That is why we built this.',
+    'Christian Dating Do\'s and Don\'ts is not experts telling you what to do. It is a place for believers who are seeking, dating, engaged, or starting over: a daily word, an honest question, and people who get it.',
   ];
   return (
     <PageShell user={user} onNav={onNav}>
@@ -388,7 +388,7 @@ function TermsPage({ user, onNav }) {
 function CommunityRulesPage({ user, onNav }) {
   usePageTitle('Community Rules');
   const rules = [
-    { title: 'Be honest, not performative.', body: 'Share where you actually are, not where you think you should be. This community is most valuable when it is real.' },
+    { title: 'Be honest, not polished.', body: 'Share where you actually are, not where you think you should be. This community is most useful when it is real.' },
     { title: 'Encourage, don\'t advise.', body: 'You are not anyone\'s counselor or pastor here. Offer prayer, share your experience, speak life, but resist the urge to tell someone what they should do.' },
     { title: 'No soliciting, no promoting.', body: 'Do not use this space to promote a business, ministry, podcast, social media account, or anything else. Posts that do this will be removed without warning.' },
     { title: 'Keep it anonymous by design.', body: 'First name and city only. Do not share last names, phone numbers, social media handles, or any information that identifies you or someone else beyond what the platform provides.' },
@@ -401,7 +401,7 @@ function CommunityRulesPage({ user, onNav }) {
       <main className="page-main page-body">
         <p className="page-kicker">Community</p>
         <h1 className="page-title" style={{ fontSize: 'clamp(32px, 4vw, 40px)', marginBottom: 12 }}>Community Rules</h1>
-        <p className="page-lead" style={{ fontFamily: 'var(--font-display)', fontSize: 17 }}>This is a safe space. Keep it that way.</p>
+        <p className="page-lead" style={{ fontFamily: 'var(--font-display)', fontSize: 17 }}>Be honest. Be kind. Protect one another.</p>
         {rules.map(rule => (
           <section key={rule.title}>
             <h2 style={{ margin: '32px 0 10px', fontFamily: 'var(--font-display)', fontSize: 18, fontWeight: 400 }}>{rule.title}</h2>
@@ -412,7 +412,7 @@ function CommunityRulesPage({ user, onNav }) {
           <p style={{ margin: 0, fontSize: 14, color: 'var(--text-2)', lineHeight: 1.7 }}>
             Posts that violate these rules will be removed. Repeated violations result in removal from the community. Moderation decisions are final.
             <br /><br />
-            We reserve the right to remove any content that contradicts the spirit of this space, even if it does not violate a specific rule.
+            We reserve the right to remove any content that works against these rules, even if it does not violate a specific line above.
           </p>
         </div>
       </main>

@@ -1004,7 +1004,7 @@ function Footer({ onNav, user }) {
         <div style={{ maxWidth: 360 }}>
           <Logo onClick={navTo('landing')} />
           <p style={{ marginTop: 14, color: 'var(--ink-mute)', fontSize: 14, lineHeight: 1.6 }}>
-            A small, faith-forward community for Christians navigating dating, engagement, and starting over. Honest. Anonymous when it needs to be. Always grounded in the Word.
+            A small community for Christians in dating, engagement, and starting over. Anonymous when you need it. Built around the Word.
           </p>
         </div>
         <FooterColumn title="Community">

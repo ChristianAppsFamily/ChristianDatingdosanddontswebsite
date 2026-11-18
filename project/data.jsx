@@ -206,7 +206,7 @@ const DAILY_WORDS = [
     body: "“Be still, and know that I am God; I will be exalted among the nations, I will be exalted in the earth.”",
     reference: 'Psalm 46:10',
     translation: 'NIV',
-    reflection: "Stillness is not the absence of doing. It is the presence of trust, the choice to stop performing for an answer and let Him be God in the waiting.",
+    reflection: "Stillness is not doing nothing. It is choosing to stop forcing an answer and let God be God while you wait.",
   },
   {
     type: 'VERSE',
@@ -224,7 +224,7 @@ const DAILY_WORDS = [
   },
   {
     type: 'WISDOM',
-    body: "The right person at the wrong time is the wrong person. God's gifts arrive with His timing already attached. Waiting is not delay. It is the gift before the gift.",
+    body: "The right person at the wrong time is still the wrong timing. God's gifts come with His timing already attached. Waiting is not wasted time.",
     reference: 'A pastoral note',
     translation: 'Devotional',
     reflection: "Where are you tempted to force a 'yes' you sense is a 'not yet'?",

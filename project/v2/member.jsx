@@ -75,7 +75,7 @@ function AppCard() {
       <span className="ico"><Icon name="smartphone" /></span>
       <h3>Take it with you</h3>
       <p>The Christian Dating Do's &amp; Don'ts app delivers your daily verse and prayer wall on iOS.</p>
-      <div className="note"><b>Two ways to stay in the Word. One mission.</b>Your app and community accounts are separate — use the same email on both to keep things organized.</div>
+      <div className="note"><b>App and community accounts are separate.</b> Use the same email on both to keep things organized.</div>
       <a className="btn btn-line btn-sm btn-block" href={APP_STORE_URL} target="_blank" rel="noopener noreferrer">Download free app <Icon name="arrow-up-right" /></a>
     </section>
   );
@@ -92,7 +92,7 @@ function TablePage({ user, expired, posts, saved, onSave, h, onNav }) {
           <div>
             <p className="tbl-date">{todayStr()}</p>
             <h1 className="display">{greeting()}, Beloved</h1>
-            <p className="tbl-stage">You're walking through <StageBadge stage={user.stage} /> — {STAGES[user.stage].note + '.'}</p>
+            <p className="tbl-stage">You're in <StageBadge stage={user.stage} />. {STAGES[user.stage].note + '.'}</p>
           </div>
           {expired && <div className="trial-chip">Your trial has ended.<button className="btn btn-primary btn-sm" onClick={h.subscribe}>Subscribe</button></div>}
         </div>
@@ -122,8 +122,8 @@ function TablePage({ user, expired, posts, saved, onSave, h, onNav }) {
                   <div className="paywall-card inverse" role="dialog" aria-labelledby="pw-h">
                     <span className="lock"><Icon name="lock" /></span>
                     <h3 id="pw-h">Your trial has ended.</h3>
-                    <p>Join the community to keep reading the Table, posting prayers, and praying with believers walking your stage.</p>
-                    <div className="row"><button className="btn btn-primary" onClick={h.subscribe}>Subscribe — $49/year</button><button className="btn btn-line" onClick={h.subscribe}>$6.99/month</button></div>
+                    <p>Subscribe to keep reading the Table, posting prayers, and praying with people in your stage.</p>
+                    <div className="row"><button className="btn btn-primary" onClick={h.subscribe}>Subscribe · $49/year</button><button className="btn btn-line" onClick={h.subscribe}>$6.99/month</button></div>
                     <small>Your Daily Word stays open. We never gate the scripture.</small>
                   </div>
                 </div>
@@ -133,8 +133,8 @@ function TablePage({ user, expired, posts, saved, onSave, h, onNav }) {
           <aside className="tbl-extras" aria-label="This week">
             <PromptCard stage={user.stage} onJournal={() => onNav('journal')} />
             <AppCard />
-            {!expired && <div className="quiet"><b>One quiet minute</b><p>Before you scroll the Table — name one person to pray for by name, and pause.</p></div>}
-            <p className="faith">“Not by might, nor by power, but by my Spirit.”<span>— Zechariah 4:6</span></p>
+            {!expired && <div className="quiet"><b>Before you open the Table</b><p>Name one person to pray for, then pause.</p></div>}
+            <p className="faith">“Not by might, nor by power, but by my Spirit.”<span>(Zechariah 4:6)</span></p>
           </aside>
         </div>
       </div>

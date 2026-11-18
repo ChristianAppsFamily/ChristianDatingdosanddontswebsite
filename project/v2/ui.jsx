@@ -33,7 +33,7 @@ function Mono({ size = 40 }) {
 
 function Brand({ onClick, size = 40, compact = false }) {
   return (
-    <button className="brand" onClick={onClick} aria-label="Christian Dating Do's and Don'ts — home">
+    <button className="brand" onClick={onClick} aria-label="Christian Dating Do's and Don'ts home">
       <Mono size={size} />
       {!compact && <span className="wordmark"><small>Christian Dating</small><b>Do's <i>&amp;</i> Don'ts</b></span>}
     </button>
@@ -80,7 +80,7 @@ function PostItem({ post, onReact, onReply, onReplyReact, locked = false, teaser
     <article className={'post' + (interactive && !open ? ' clickable' : '')} data-open={open}
       onClick={() => interactive && !open && setOpen(true)}>
       <header className="post-head" onClick={e => { if (open) { e.stopPropagation(); setOpen(false); } }} style={{ cursor: open ? 'pointer' : undefined }}>
-        <div className="post-who"><b>{post.name}</b> — {post.location}</div>
+        <div className="post-who"><b>{post.name}</b> · {post.location}</div>
         <span className="post-time">{post.time}</span>
         {interactive && (
           <button className="post-toggle" aria-expanded={open} aria-label={open ? 'Collapse replies' : 'Expand replies'}
@@ -116,7 +116,7 @@ function Replies({ post, locked, onReply, onReplyReact }) {
       {shown.map(r => (
         <div className="reply" key={r.id}>
           <div className="post-head">
-            <div className="post-who" style={{ flex: '0 1 auto' }}><b>{r.name}</b> — {r.location}</div>
+            <div className="post-who" style={{ flex: '0 1 auto' }}><b>{r.name}</b> · {r.location}</div>
             <StageBadge stage={r.stage} />
             <span className="post-time" style={{ marginLeft: 'auto' }}>{r.time}</span>
           </div>
@@ -188,7 +188,7 @@ function AppBanner() {
     <div className="app-banner" role="region" aria-label="App download">
       <div className="wrap">
         <button className="icon-btn" aria-label="Dismiss" onClick={() => { try { localStorage.setItem(BANNER_KEY, '1'); } catch (e) {} setHidden(true); }}><Icon name="x" /></button>
-        <p><Icon name="smartphone" />Also available on iOS — Get the free app.<span>Your app and community accounts are separate — that's by design.</span></p>
+        <p><Icon name="smartphone" />Also on iOS. Get the free app.<span>App and community accounts are separate on purpose.</span></p>
         <a href={APP_STORE_URL} target="_blank" rel="noopener noreferrer">Download</a>
       </div>
     </div>

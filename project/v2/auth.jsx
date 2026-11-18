@@ -150,8 +150,8 @@ function AuthPage({ mode, onComplete, onNav, onForgotPassword }) {
       </div>
       <aside className="auth-side inverse" aria-label="From the community">
         <p className="mk-mark">From the Table this morning</p>
-        <blockquote>“Single brothers — stop praying for a wife while you're still avoiding the work of becoming a husband. The waiting is the workshop.”</blockquote>
-        <cite><b>Tomás</b> — California <StageBadge stage="seeking" /></cite>
+        <blockquote>“Single brothers: stop praying for a wife while you're still avoiding the work of becoming a husband. The waiting is the workshop.”</blockquote>
+        <cite><b>Tomás</b> · California <StageBadge stage="seeking" /></cite>
         <div className="auth-stats">
           <div><b>2,400+</b><span>members</span></div>
           <div><b>140</b><span>posts this week</span></div>
@@ -187,9 +187,9 @@ function Onboarding({ onComplete, onNav }) {
       <header className="onb-top"><div className="wrap"><Brand onClick={() => onNav('landing')} /><div className="progress">Step 1 of 1 <i></i></div></div></header>
       <main className="onb-main">
         <div className="wrap"><div className="onb-inner rise">
-          <p className="mk-mark">One quiet question</p>
+          <p className="mk-mark">One question</p>
           <h1 className="display">Where are you right now?</h1>
-          <p className="onb-lead">We'll tune your daily word, your weekly prompt, and your table to the season you're actually in. You can change this anytime.</p>
+          <p className="onb-lead">We'll match your Daily Word, weekly prompt, and Table to your stage. You can change this anytime.</p>
           {error && <p className="hint" role="alert" style={{ color: 'var(--error)', textAlign: 'center' }}>{error}</p>}
           <div className="stage-grid" role="radiogroup" aria-label="Your life stage" onKeyDown={onKey}>
             {STAGE_ORDER.map(id => {

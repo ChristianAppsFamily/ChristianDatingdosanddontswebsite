@@ -35,7 +35,7 @@ function Hero({ onNav, post }) {
         <div className="rise">
           <p className="mk-mark">A small Christian community</p>
           <h1 className="display">Real people talking honestly about dating and faith.</h1>
-          <p className="hero-sub">A verse every morning, a question every week, and believers who will pray for you and cheer you on.</p>
+          <p className="hero-sub">A verse every morning, a question every week, and believers who will pray for you and seek to encourage you.</p>
           <div className="hero-cta">
             <button className="btn btn-primary" onClick={() => onNav('signup')}>Start free trial <Icon name="arrow-right" /></button>
             <a className="btn btn-text" href="#what-you-get">Learn more</a>
@@ -43,7 +43,7 @@ function Hero({ onNav, post }) {
           <p className="hero-fine">7 days free. $6.99/mo or $49/yr after.</p>
           <div className="hero-proof">
             <span className="stage-dots" aria-hidden="true">{STAGE_ORDER.map(s => <span key={s} style={{ background: `var(--${s}-dot)` }}></span>)}</span>
-            <span><b>2,400+ believers</b> walking through it together this week.</span>
+            <span><b>2,400+ members</b> in the conversation this week.</span>
           </div>
         </div>
         <div className="hero-media">
@@ -70,7 +70,7 @@ function TablePreview({ onNav, posts }) {
         <div>
           <p className="sec-label">The Table</p>
           <h2 className="display">The conversation is already happening.</h2>
-          <p className="mk-table-sub">Real people, first names, sometimes a city. Anonymous when it needs to be. Always faith-forward.</p>
+          <p className="mk-table-sub">Real people. First names, sometimes a city. Anonymous when you need it. Built around Scripture.</p>
           <div className="mk-legend">
             {STAGE_ORDER.map(s => <div key={s}><StageBadge stage={s} /><p>{STAGES[s].note}</p></div>)}
           </div>
@@ -101,14 +101,14 @@ function Features({ posts }) {
     <section className="mk-section" id="what-you-get">
       <div className="wrap">
         <div className="mk-head">
-          <div><p className="sec-label">What you get</p><h2 className="display">Three small things, done well.</h2></div>
-          <p>No swiping. No feeds. No algorithm. Just a daily anchor and a community that knows your stage.</p>
+          <div><p className="sec-label">What you get</p><h2 className="display">Three things. That's it.</h2></div>
+          <p>No swiping. No feed. No matching. A daily verse and a community that knows your stage.</p>
         </div>
         <div className="feat feat-a">
           <div>
             <span className="feat-num">01</span>
             <h3>A Daily Word</h3>
-            <p>A short scripture, devotional, or piece of wisdom — chosen for the season you're actually in.</p>
+            <p>A short scripture, a short note, or a piece of wisdom chosen for where you are right now.</p>
           </div>
           <div className="feat-visual">
             <div className="photo feat-photo">
@@ -127,13 +127,13 @@ function Features({ posts }) {
           <div className="feat-card panel-sage">
             <span className="feat-num">02</span>
             <h3>The Table</h3>
-            <p>A quiet, anonymous community thread. Pray, encourage, and amen one another by first name only.</p>
+            <p>An anonymous community thread. Pray, encourage, and amen one another by first name only.</p>
             <div className="preview mini-feed"><PostItem post={p} teaser /></div>
           </div>
           <div className="feat-card panel-plum">
             <span className="feat-num">03</span>
             <h3>Stage-aware</h3>
-            <p>Seeking, dating, engaged, or starting over — filter to the believers walking the same road you are.</p>
+            <p>Seeking, dating, engaged, or starting over. Filter to people in the same season.</p>
             <div className="preview stage-stack">{STAGE_ORDER.map(s => <StageBadge key={s} stage={s} large />)}</div>
           </div>
         </div>
@@ -148,25 +148,25 @@ function Pricing({ onNav }) {
     <section className="mk-section" id="pricing" style={{ paddingTop: 0 }}>
       <div className="wrap">
         <div className="mk-head">
-          <div><p className="sec-label">Pricing</p><h2 className="display">Less than a coffee. Honest pricing.</h2></div>
-          <p>A 7-day free trial. Cancel anytime. The Daily Word is always visible — we never gate scripture.</p>
+          <div><p className="sec-label">Pricing</p><h2 className="display">$6.99 a month. Or $49 a year.</h2></div>
+          <p>7-day free trial. Cancel anytime. The Daily Word stays free. We do not gate Scripture.</p>
         </div>
         <div className="pricing">
           <div className="plan">
             <div className="plan-top"><span className="plan-name">Monthly</span></div>
             <div className="plan-price"><b>$6.99</b><span>per month</span></div>
-            <p className="plan-line">Try for a season, see if it sticks.</p>
+            <p className="plan-line">Start monthly. Switch later if you want.</p>
             <button className="btn btn-line btn-block" onClick={() => onNav('signup')}>Start with monthly</button>
           </div>
           <div className="plan plan-featured inverse">
             <div className="plan-top"><span className="plan-name">Annual</span><span className="plan-badge">Best value · save 42%</span></div>
             <div className="plan-price"><b>$49</b><span>per year</span></div>
-            <p className="plan-line">The way most members stay. Two months free.</p>
+            <p className="plan-line">Best price. Two months free.</p>
             <button className="btn btn-primary btn-block" onClick={() => onNav('signup')}>Start annual trial</button>
           </div>
           <ul className="plan-includes">{includes.map(t => <li key={t}><Icon name="check" />{t}</li>)}</ul>
         </div>
-        <p className="price-note">Need help affording it? <a href="mailto:ChristianAppEmpire@gmail.com">Email us</a> — we have a sponsored seats program.</p>
+        <p className="price-note">Need help paying? <a href="mailto:ChristianAppEmpire@gmail.com">Email us</a>. We have sponsored seats.</p>
       </div>
     </section>
   );
@@ -177,9 +177,9 @@ function FinalCTA({ onNav }) {
     <section className="mk-cta">
       <div className="wrap mk-cta-grid">
         <div>
-          <p className="mk-mark">The hard road, walked together</p>
-          <h2 className="display">You weren't meant to figure this out alone.</h2>
-          <p>Seven days free. No swiping, no algorithm. Just the Word, a question, and the company of the saints.</p>
+          <p className="mk-mark">Join the Table</p>
+          <h2 className="display">You don't have to do this alone.</h2>
+          <p>Seven days free. A verse, a question, and people who will pray with you.</p>
           <button className="btn btn-ink" onClick={() => onNav('signup')}>Start free trial <Icon name="arrow-right" /></button>
         </div>
         <div className="photo cta-photo">
@@ -232,7 +232,7 @@ function SiteFooter({ onNav }) {
         <div className="foot-grid">
           <div>
             <Brand size={44} onClick={() => onNav && onNav('landing')} />
-            <p className="foot-blurb">A small, warm community for Christians navigating dating, engagement, and starting over. Anonymous when you need it. Always faith-forward.</p>
+            <p className="foot-blurb">A small community for Christians in dating, engagement, and starting over. Anonymous when you need it. Built around the Word.</p>
           </div>
           {cols.map(([h, links]) => (
             <nav className="foot-col" key={h} aria-label={h}>
@@ -243,7 +243,7 @@ function SiteFooter({ onNav }) {
         </div>
         <div className="foot-base">
           <span>© {new Date().getFullYear()} Christian Dating Do's &amp; Don'ts</span>
-          <span><q>Plans fail for lack of counsel, but with many advisers they succeed.</q> — Proverbs 15:22</span>
+          <span><q>Plans fail for lack of counsel, but with many advisers they succeed.</q> (Proverbs 15:22)</span>
         </div>
       </div>
     </footer>

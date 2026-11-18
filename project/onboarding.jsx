@@ -20,7 +20,7 @@ function OnboardingPage({ onComplete, onNav }) {
       }}>
         <div style={{ maxWidth: 820, width: '100%' }} className="fade-in">
           <div style={{ textAlign: 'center', marginBottom: 40 }}>
-            <div className="eyebrow" style={{ marginBottom: 14 }}>One quiet question</div>
+            <div className="eyebrow" style={{ marginBottom: 14 }}>One question</div>
             <h1 className="serif" style={{
               margin: 0, fontSize: 'clamp(36px, 4.6vw, 60px)', lineHeight: 1.05,
               fontWeight: 600, letterSpacing: '-0.02em', color: 'var(--ink)',
@@ -32,7 +32,7 @@ function OnboardingPage({ onComplete, onNav }) {
               margin: '14px auto 0', maxWidth: 480,
               fontSize: 16.5, color: 'var(--ink-soft)', lineHeight: 1.55,
             }}>
-              We'll tune your daily word, your weekly prompt, and your wall to the season you're actually in. You can change this anytime.
+              We'll match your Daily Word, weekly prompt, and Table to your stage. You can change this anytime.
             </p>
           </div>
 

@@ -3,7 +3,7 @@ function XPost({ p, open }) {
   const k = KINDS[p.category];
   return (
     <div className="x-post">
-      <div className="post-head"><div className="post-who"><b>{p.name}</b> — {p.location}</div><span className="post-time">{p.time}</span></div>
+      <div className="post-head"><div className="post-who"><b>{p.name}</b> · {p.location}</div><span className="post-time">{p.time}</span></div>
       <div className="post-tags"><StageBadge stage={p.stage} />{k && <span className="post-kind"><Icon name={k.icon} />{k.label}</span>}</div>
       <p className="post-body">{p.body}</p>
       <div className="x-acts">
@@ -44,7 +44,7 @@ function ScreenThread() {
         <p style={{ fontSize: 13, fontWeight: 800, color: 'var(--text-3)', padding: '14px 0 2px' }}>{p.replies.length} Replies</p>
         {p.replies.slice(0, 3).map(r => (
           <div className="reply" key={r.id} style={{ paddingRight: 0 }}>
-            <div className="post-head"><div className="post-who" style={{ flex: '0 1 auto', fontSize: 13.5 }}><b>{r.name}</b> — {r.location}</div><StageBadge stage={r.stage} /><span className="post-time" style={{ marginLeft: 'auto' }}>{r.time}</span></div>
+            <div className="post-head"><div className="post-who" style={{ flex: '0 1 auto', fontSize: 13.5 }}><b>{r.name}</b> · {r.location}</div><StageBadge stage={r.stage} /><span className="post-time" style={{ marginLeft: 'auto' }}>{r.time}</span></div>
             <p className="post-body" style={{ fontSize: 15 }}>{r.body}</p>
           </div>
         ))}
@@ -59,7 +59,7 @@ function ScreenWord() {
     <div className="x">
       <Bar left={<span style={{ fontSize: 13.5, fontWeight: 700, color: 'var(--text-3)' }}>{todayStr()}</span>} right={<Av />} />
       <h1 className="x-title">{greeting()}, Beloved</h1>
-      <p className="x-sub">You're walking through <StageBadge stage="seeking" /></p>
+      <p className="x-sub">You're in <StageBadge stage="seeking" /></p>
       <div className="x-plate"><span className="type">{w.type}</span><blockquote>{w.body}</blockquote><p className="word-ref"><b>{w.reference}</b> · {w.translation}</p></div>
       <p className="x-refl">{w.reflection}</p>
       <div className="x-btns"><button className="btn btn-line btn-sm"><Icon name="bookmark" />Save</button><button className="btn btn-text btn-sm"><Icon name="share" />Share</button></div>
@@ -84,7 +84,7 @@ function ScreenOnboard() {
     <div className="x">
       <Bar left={<Mono size={32} />} right={<span style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-3)' }}>Step 1 of 1</span>} />
       <h1 className="x-title" style={{ fontSize: 44, paddingTop: 20 }}>Where are you right now?</h1>
-      <p className="x-sub" style={{ fontSize: 15, color: 'var(--text-2)', lineHeight: 1.5 }}>We'll tune your daily word, your weekly prompt, and your table to the season you're actually in. You can change this anytime.</p>
+      <p className="x-sub" style={{ fontSize: 15, color: 'var(--text-2)', lineHeight: 1.5 }}>We'll match your Daily Word, weekly prompt, and Table to your stage. You can change this anytime.</p>
       <div className="x-stage">{STAGE_ORDER.map(id => (
         <button key={id} className="stage-opt" data-s={id} role="radio" aria-checked={id === 'dating'}>
           <span className="stage-ico"><Icon name={STAGES[id].icon} /></span>
@@ -108,7 +108,7 @@ function ScreenPaywall() {
         <span className="lock" style={{ width: 52, height: 52, borderRadius: '50%', background: 'var(--ink-800)', color: 'var(--gold-300)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: 22 }}><Icon name="lock" /></span>
         <h2 className="display" style={{ fontSize: 34, margin: '16px 0 10px' }}>Your trial has ended.</h2>
         <p style={{ color: 'var(--text-on-inverse-2)', fontSize: 15 }}>Join the community to keep reading the Table, posting prayers, and praying with believers walking your stage.</p>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginTop: 22 }}><button className="btn btn-primary btn-block">Subscribe — $49/year</button><button className="btn btn-line btn-block">$6.99/month</button></div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginTop: 22 }}><button className="btn btn-primary btn-block">Subscribe · $49/year</button><button className="btn btn-line btn-block">$6.99/month</button></div>
         <p style={{ fontSize: 12.5, color: 'var(--text-on-inverse-2)', marginTop: 16, textAlign: 'center' }}>Your Daily Word stays open. We never gate the scripture.</p>
       </div>
     </div>
@@ -116,7 +116,7 @@ function ScreenPaywall() {
 }
 
 const SCREENS = [
-  ['The Table', 'Large serif title collapses to inline on scroll. Full-bleed rows divided by hairlines — no cards.', ['Filters scroll horizontally, never bounce', 'Composer is a single pill; tap opens a sheet', 'Reaction labels hide; VoiceOver keeps them'], ScreenTable],
+  ['The Table', 'Large serif title collapses to inline on scroll. Full-bleed rows divided by hairlines. No cards.', ['Filters scroll horizontally, never bounce', 'Composer is a single pill; tap opens a sheet', 'Reaction labels hide; VoiceOver keeps them'], ScreenTable],
   ['Post & replies', 'Pushes as a native detail view. Reply bar pins above the home indicator and rides the keyboard.', ['One level of replies only', '280 characters, no @mentions', 'Swipe from edge to go back'], ScreenThread],
   ['Daily Word', 'Home of the Daily Word tab. Greeting, gold scripture plate, reflection in the reading face.', ['Never gated', 'Dynamic Type scales plate and reflection', 'Save adds to Library with a light haptic'], ScreenWord],
   ['Weekly prompt journal', 'Presented as a full-screen modal. Feels like a private page, not a form.', ['Save in the top-right, Close top-left', 'Autosaves drafts locally', 'Entries are private, never posted'], ScreenJournal],
@@ -139,7 +139,7 @@ function IOSSpec() {
         <header className="ios-head">
           <Brand size={44} />
           <h1 className="display" style={{ marginTop: 40 }}>The same table, in your pocket.</h1>
-          <p>Companion visual direction for the iOS redesign. Built from existing product functionality only — no new features. Uses the shared tokens in <code>v2/tokens.json</code>; layouts are native, not the website shrunk down.</p>
+          <p>Companion visual direction for the iOS redesign. Built from existing product functionality only. No new features. Uses the shared tokens in <code>v2/tokens.json</code>; layouts are native, not the website shrunk down.</p>
         </header>
         <div className="ios-row">
           {SCREENS.map(([t, d, b, C]) => (

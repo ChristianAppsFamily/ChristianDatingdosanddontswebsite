@@ -123,7 +123,7 @@ function Greeting({ user, expired, onSubscribe }) {
           margin: '10px 0 0', fontSize: 16, color: 'var(--ink-soft)',
           display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap',
         }}>
-          You're walking through{' '}
+          You're in{' '}
           <StageTag stage={user.stage} />
           {' '}· {STAGES[user.stage].note.toLowerCase()}.
         </p>
@@ -323,11 +323,11 @@ function QuietPromptCard() {
       background: 'var(--paper)', borderRadius: 'var(--r-lg)',
       padding: '18px 20px', border: '1px solid var(--line)',
     }}>
-      <div className="eyebrow" style={{ marginBottom: 6 }}>One quiet minute</div>
+      <div className="eyebrow" style={{ marginBottom: 6 }}>Before you open the Table</div>
       <div className="serif" style={{
         fontSize: 16, fontStyle: 'italic', color: 'var(--ink-soft)', lineHeight: 1.5,
       }}>
-        Before you scroll the Wall. Name one person to pray for by name, and pause.
+        Name one person to pray for, then pause.
       </div>
     </div>
   );
