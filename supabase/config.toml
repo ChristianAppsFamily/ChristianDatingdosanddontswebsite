@@ -1,0 +1,17 @@
+# Linked project for Christian Dating Do's & Don'ts website schema
+# (hosted on tgacfeisoaonzushuugh until a dedicated free project slot is free)
+project_id = "tgacfeisoaonzushuugh"
+
+[auth]
+enabled = true
+site_url = "http://127.0.0.1:8765"
+additional_redirect_urls = [
+  "http://127.0.0.1:8765/auth/callback",
+  "http://localhost:8765/auth/callback",
+  "https://*.vercel.app/auth/callback"
+]
+
+[auth.email]
+enable_signup = true
+# Prefer disabling confirm in the dashboard for smoother trials, or keep on and use the in-app email-confirm path.
+enable_confirmations = true

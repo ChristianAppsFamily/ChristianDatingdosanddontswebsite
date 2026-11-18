@@ -13,6 +13,7 @@ const SCREEN_PATHS = {
   landing: '/',
   signup: '/signup',
   login: '/login',
+  forgot: '/forgot',
   onboarding: '/onboarding',
   dashboard: '/dashboard',
   table: '/dashboard',
@@ -32,6 +33,7 @@ const PATH_TO_SCREEN = {
   '/': 'landing',
   '/signup': 'signup',
   '/login': 'login',
+  '/forgot': 'forgot',
   '/onboarding': 'onboarding',
   '/dashboard': 'dashboard',
   '/word': 'word',
@@ -287,48 +289,59 @@ function App() {
   const handleSignup = async (info) => {
     setSignupInfo(info);
     if (isSupabaseConfigured()) {
-      try {
-        await signUpUser({
-          email: info.email, password: info.password,
-          name: info.name, city: info.city, plan: info.plan,
-        });
-      } catch (e) { console.error('[signup]', e); }
+      const data = await signUpUser({
+        email: info.email, password: info.password,
+        name: info.name, city: info.city, plan: info.plan,
+      });
+      // Email confirmation required: no session yet
+      if (!data?.session) {
+        setToast('Check your email to confirm, then sign in.');
+        navigate('login');
+        return;
+      }
+      const profile = await loadCurrentProfile();
+      if (profile) setUser(profile);
+      navigate('onboarding');
+      return;
     }
+    // Demo fallback only when Supabase is not configured
     navigate('onboarding');
   };
 
   const handleLogin = async (info) => {
     if (isSupabaseConfigured()) {
-      try {
-        await signInUser({ email: info.email, password: info.password });
-        const profile = await loadCurrentProfile();
-        if (profile) {
-          setUser(profile);
-          const m = profile.is_premium ? 'premium' : 'expired';
-          setTrialMode(m); setTweak('trialMode', m);
-          await reloadPosts(profile.id);
-          navigate('dashboard');
-          return;
-        }
-      } catch (e) { console.error('[login]', e); }
+      await signInUser({ email: info.email, password: info.password });
+      const profile = await loadCurrentProfile();
+      if (!profile) throw new Error('Could not load your profile. Try again.');
+      setUser(profile);
+      const m = profile.is_premium ? 'premium' : 'expired';
+      setTrialMode(m); setTweak('trialMode', m);
+      await reloadPosts(profile.id);
+      navigate(profile.stage ? 'dashboard' : 'onboarding');
+      return;
     }
+    // Demo fallback only when Supabase is not configured
     setUser({ name: 'Marcus', city: 'Houston, TX', stage: 'seeking', plan: 'annual' });
     navigate('dashboard');
+  };
+
+  const handleForgotPassword = async (email) => {
+    if (!isSupabaseConfigured()) throw new Error('Password reset needs Supabase configured.');
+    await resetPassword(email);
   };
 
   const handleOnboardingComplete = async (stage) => {
     if (isSupabaseConfigured()) {
       const profile = await loadCurrentProfile();
-      if (profile) {
-        await updateUserRow(profile.id, { stage });
-        const updated = { ...profile, stage };
-        setUser(updated);
-        const m = updated.is_premium ? 'premium' : 'expired';
-        setTrialMode(m); setTweak('trialMode', m);
-        await reloadPosts(profile.id);
-        navigate('dashboard');
-        return;
-      }
+      if (!profile) throw new Error('Sign in again to finish onboarding.');
+      await updateUserRow(profile.id, { stage });
+      const updated = { ...profile, stage };
+      setUser(updated);
+      const m = updated.is_premium ? 'premium' : 'expired';
+      setTrialMode(m); setTweak('trialMode', m);
+      await reloadPosts(profile.id);
+      navigate('dashboard');
+      return;
     }
     setUser({
       name: signupInfo?.name || 'You',
@@ -489,7 +502,9 @@ function App() {
   };
 
   const expired = trialMode === 'expired';
-  const activeUser = user || { name: 'Marcus', city: 'Houston, TX', stage: 'seeking', plan: 'annual' };
+  const activeUser = user
+    ? { ...user, stage: user.stage || 'seeking' }
+    : { name: 'Marcus', city: 'Houston, TX', stage: 'seeking', plan: 'annual' };
   const shellUser = { ...activeUser, plan: expired ? 'expired' : activeUser.plan };
   const memberHandlers = {
     subscribe: handleSubscribe,
@@ -520,6 +535,8 @@ function App() {
     view = <AuthPage key="signup" mode="signup" onComplete={handleSignup} onNav={navigate} />;
   } else if (screen === 'login') {
     view = <AuthPage key="login" mode="login" onComplete={handleLogin} onNav={navigate} />;
+  } else if (screen === 'forgot') {
+    view = <AuthPage key="forgot" mode="forgot" onComplete={() => {}} onForgotPassword={handleForgotPassword} onNav={navigate} />;
   } else if (screen === 'onboarding') {
     view = <Onboarding onComplete={handleOnboardingComplete} onNav={navigate} />;
   } else if (MEMBER_ROUTES.includes(screen)) {

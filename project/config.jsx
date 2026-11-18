@@ -1,28 +1,24 @@
-/* config.jsx, backend wiring config + Supabase client + auth/payment helpers
+/* config.jsx — backend wiring: Supabase client + auth/payment helpers
 
-   ─────────────────────────────────────────────────────────────────────────
-   👉 FILL IN YOUR REAL CREDENTIALS BELOW.
-   Until these are filled in, the app automatically falls back to the original
-   local/mock behavior so the prototype keeps working during setup.
-   ───────────────────────────────────────────────────────────────────────── */
+   Supabase is live for this site (project: Christian Dating Coach AI / website schema).
+   Stripe keys stay placeholders until products/prices are created — see BACKEND.md.
+   Optional overrides: window.__CDDD_CONFIG__ = { SUPABASE_URL, ... } before this script.
+*/
 
-const CONFIG = {
-  // SUPABASE
-  SUPABASE_URL: 'https://YOUR_PROJECT.supabase.co',   // ← Project URL
-  SUPABASE_ANON_KEY: 'YOUR_ANON_KEY',                 // ← Anon (public) key
+const CONFIG = Object.assign({
+  // SUPABASE (anon key is public by design)
+  SUPABASE_URL: 'https://tgacfeisoaonzushuugh.supabase.co',
+  SUPABASE_ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRnYWNmZWlzb2Fvbnp1c2h1dWdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQ4ODk0MTQsImV4cCI6MjExMDQ2NTQxNH0.6HLWFNUA8tP4SnBABlsr3ZSrgo2jN15cNfiZ7rOE5wY',
 
-  // STRIPE
-  STRIPE_PUBLISHABLE_KEY: 'pk_test_YOUR_STRIPE_KEY',  // ← Publishable key
-  STRIPE_MONTHLY_PRICE_ID: 'price_XXX_MONTHLY',       // ← Monthly price ID
-  STRIPE_ANNUAL_PRICE_ID:  'price_XXX_ANNUAL',        // ← Annual price ID
+  // STRIPE — fill after creating products (see BACKEND.md)
+  STRIPE_PUBLISHABLE_KEY: 'pk_test_YOUR_STRIPE_KEY',
+  STRIPE_MONTHLY_PRICE_ID: 'price_XXX_MONTHLY',
+  STRIPE_ANNUAL_PRICE_ID: 'price_XXX_ANNUAL',
 
   // APP STORE
   APP_STORE_URL: 'https://apps.apple.com/us/app/christian-dating-dos-and-donts/id911295588',
-};
+}, (typeof window !== 'undefined' && window.__CDDD_CONFIG__) || {});
 
-/* True only once real Supabase credentials have been dropped in above.
-   Every backend call is guarded by this so the prototype degrades gracefully
-   to its original in-memory behavior until you're configured. */
 function isSupabaseConfigured() {
   return (
     !!CONFIG.SUPABASE_URL &&
@@ -35,11 +31,14 @@ function isSupabaseConfigured() {
 function isStripeConfigured() {
   return (
     !!CONFIG.STRIPE_PUBLISHABLE_KEY &&
-    !CONFIG.STRIPE_PUBLISHABLE_KEY.includes('YOUR_STRIPE_KEY')
+    !CONFIG.STRIPE_PUBLISHABLE_KEY.includes('YOUR_STRIPE_KEY') &&
+    !!CONFIG.STRIPE_MONTHLY_PRICE_ID &&
+    !CONFIG.STRIPE_MONTHLY_PRICE_ID.includes('XXX') &&
+    !!CONFIG.STRIPE_ANNUAL_PRICE_ID &&
+    !CONFIG.STRIPE_ANNUAL_PRICE_ID.includes('XXX')
   );
 }
 
-/* Supabase client (only created when configured + library is present). */
 let sb = null;
 if (isSupabaseConfigured() && typeof window !== 'undefined' && window.supabase) {
   try {
@@ -50,10 +49,6 @@ if (isSupabaseConfigured() && typeof window !== 'undefined' && window.supabase) 
   }
 }
 
-/* ----------------------------------------------------------------
-   TIME, turn a stored timestamp into the "3 hours ago" style string
-   the cards already render. Keeps the existing visual language.
-   ---------------------------------------------------------------- */
 function timeAgo(input) {
   if (!input) return 'just now';
   const then = new Date(input).getTime();
@@ -70,17 +65,13 @@ function timeAgo(input) {
   return new Date(input).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
 }
 
-/* ----------------------------------------------------------------
-   AUTH, thin wrappers around Supabase Auth.
-   `profileFromRow` maps a public.users row → the shape the UI expects.
-   ---------------------------------------------------------------- */
 function profileFromRow(row, authUser) {
   if (!row) return null;
   return {
     id: row.id,
     name: row.name || 'You',
     city: row.city || 'somewhere',
-    stage: row.stage || 'seeking',
+    stage: row.stage || null,
     plan: row.plan || 'annual',
     is_premium: !!row.is_premium,
     email: row.email || authUser?.email || '',
@@ -94,14 +85,25 @@ async function fetchUserRow(userId) {
   return data;
 }
 
-/* Sign up with email/password and stash name/city/plan in auth metadata.
-   The public.users row is created by a DB trigger from that metadata. */
+function authErrorMessage(err) {
+  const msg = (err && (err.message || err.error_description || err.msg)) || String(err || 'Something went wrong');
+  if (/invalid login credentials/i.test(msg)) return 'Email or password is incorrect.';
+  if (/email not confirmed/i.test(msg)) return 'Confirm your email first. Check your inbox for the link.';
+  if (/user already registered/i.test(msg)) return 'An account with that email already exists. Sign in instead.';
+  if (/password/i.test(msg) && /least/i.test(msg)) return 'Password must be at least 6 characters.';
+  if (/rate limit|too many/i.test(msg)) return 'Too many attempts. Wait a moment and try again.';
+  return msg;
+}
+
 async function signUpUser({ email, password, name, city, plan }) {
   if (!sb) throw new Error('Supabase not configured');
   const { data, error } = await sb.auth.signUp({
     email,
     password,
-    options: { data: { name, city, plan } },
+    options: {
+      data: { name, city, plan },
+      emailRedirectTo: (typeof window !== 'undefined' ? window.location.origin : '') + '/auth/callback',
+    },
   });
   if (error) throw error;
   return data;
@@ -114,12 +116,19 @@ async function signInUser({ email, password }) {
   return data;
 }
 
+async function resetPassword(email) {
+  if (!sb) throw new Error('Supabase not configured');
+  const redirectTo = (typeof window !== 'undefined' ? window.location.origin : '') + '/auth/callback?reset=1';
+  const { data, error } = await sb.auth.resetPasswordForEmail(email, { redirectTo });
+  if (error) throw error;
+  return data;
+}
+
 async function signOutUser() {
   if (!sb) return;
   try { await sb.auth.signOut(); } catch (e) { console.error('[auth] signOut', e); }
 }
 
-/* Google OAuth, redirect target must match Supabase Auth redirect allow-list. */
 function getOAuthRedirectUrl() {
   return window.location.origin + '/auth/callback';
 }
@@ -133,7 +142,6 @@ async function signInWithGoogle() {
   if (error) throw error;
 }
 
-/* Insert-only upsert for Google users, never overwrite stage/plan on return visits. */
 async function upsertGoogleUser(user) {
   if (!sb || !user?.id) return;
   const md = user.user_metadata || {};
@@ -145,7 +153,6 @@ async function upsertGoogleUser(user) {
   if (error) console.error('[auth] upsertGoogleUser', error);
 }
 
-/* True when URL carries OAuth tokens or our post-callback screen param. */
 function isOAuthCallbackUrl() {
   const hash = window.location.hash || '';
   const params = new URLSearchParams(window.location.search);
@@ -157,7 +164,6 @@ function isOAuthCallbackUrl() {
   );
 }
 
-/* Exchange OAuth redirect for a session; upsert profile row. Returns routing hint. */
 async function handleOAuthCallback() {
   if (!sb) return null;
   const { data: { session }, error } = await sb.auth.getSession();
@@ -177,7 +183,6 @@ function clearOAuthUrlParams() {
   window.history.replaceState({}, '', window.location.pathname);
 }
 
-/* Persist onboarding/profile changes (stage, plan, etc.) on the user row. */
 async function updateUserRow(userId, patch) {
   if (!sb || !userId) return null;
   const { data, error } = await sb.from('users').update(patch).eq('id', userId).select().maybeSingle();
@@ -185,28 +190,24 @@ async function updateUserRow(userId, patch) {
   return data;
 }
 
-/* Load the currently authenticated profile (or null). */
 async function loadCurrentProfile() {
   if (!sb) return null;
   const { data: { user } } = await sb.auth.getUser();
   if (!user) return null;
   let row = await fetchUserRow(user.id);
-  // Trigger may not have populated yet on a brand-new account, backfill once.
   if (!row) {
     const md = user.user_metadata || {};
     await sb.from('users').upsert({
       id: user.id, email: user.email,
-      name: md.name || 'You', city: md.city || 'somewhere', plan: md.plan || 'annual',
+      name: md.name || md.full_name || 'You',
+      city: md.city || 'somewhere',
+      plan: md.plan || 'annual',
     }).select();
     row = await fetchUserRow(user.id);
   }
   return profileFromRow(row, user);
 }
 
-/* ----------------------------------------------------------------
-   STRIPE CHECKOUT, calls the `create-checkout-session` Edge Function,
-   then redirects with Stripe.js. The webhook flips is_premium server-side.
-   ---------------------------------------------------------------- */
 async function startCheckout(user, planOverride) {
   if (!isSupabaseConfigured() || !sb) {
     console.warn('[stripe] Supabase not configured, skipping checkout.');
@@ -228,13 +229,12 @@ async function startCheckout(user, planOverride) {
         plan,
         userId: user?.id || null,
         email: user?.email || null,
-        successUrl: window.location.origin + window.location.pathname + '?checkout=success',
-        cancelUrl: window.location.origin + window.location.pathname + '?checkout=cancel',
+        successUrl: window.location.origin + '/dashboard?checkout=success',
+        cancelUrl: window.location.origin + '/dashboard?checkout=cancel',
       },
     });
     if (error) throw error;
 
-    // Prefer the session URL (no client key needed); fall back to Stripe.js redirect.
     if (data?.url) { window.location.href = data.url; return true; }
     if (data?.id && window.Stripe) {
       const stripe = window.Stripe(CONFIG.STRIPE_PUBLISHABLE_KEY);
@@ -257,8 +257,10 @@ Object.assign(window, {
   timeAgo,
   profileFromRow,
   fetchUserRow,
+  authErrorMessage,
   signUpUser,
   signInUser,
+  resetPassword,
   signOutUser,
   getOAuthRedirectUrl,
   signInWithGoogle,
