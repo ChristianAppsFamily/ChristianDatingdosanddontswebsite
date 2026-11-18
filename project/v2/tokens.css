@@ -1,0 +1,44 @@
+/* Christian Dating Do's & Don'ts — Brand tokens v2 · "Modern Romance. Rooted in Faith."
+   Portable mirror: v2/tokens.json */
+@import url("https://fonts.googleapis.com/css2?family=Gloock&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap");
+@import url("https://cdn.jsdelivr.net/npm/lucide-static@0.469.0/font/lucide.css");
+:root{
+/* Brand primitives */
+--coral-50:#FEF3F0;--coral-100:#FCE3DD;--coral-300:#F4A193;--coral-500:#EA624F;--coral-600:#DD5240;--coral-700:#B23F2C;--coral-900:#6E2418;
+--ink-900:#261F2B;--ink-800:#352C3B;--ink-700:#4A4150;--ink-500:#6B6171;--ink-300:#B4ABB7;--ink-200:#D9D2DA;
+--warm-0:#FFFFFF;--warm-50:#FFFBF7;--warm-100:#FAF3EC;--warm-200:#F2E8DE;--warm-300:#E6D9CC;
+--gold-100:#FBEED6;--gold-300:#F5D6A0;--gold-700:#7A5410;
+--sage-100:#EDF3EE;--sage-300:#DCE7DE;--sage-700:#3D6148;
+--plum-100:#F1EBF4;--plum-300:#E2D5E8;--plum-700:#6A4778;
+/* Semantic roles */
+--bg:var(--warm-50);--bg-muted:var(--warm-100);--surface:var(--warm-0);--surface-sunk:var(--warm-100);
+--bg-inverse:var(--ink-900);--surface-inverse:var(--ink-800);
+--text:var(--ink-900);--text-2:var(--ink-700);--text-3:var(--ink-500);--text-disabled:var(--ink-300);
+--text-on-inverse:var(--warm-50);--text-on-inverse-2:#CFC5D3;
+--text-accent:var(--coral-700);--text-on-accent:var(--ink-900);
+--accent:var(--coral-500);--accent-hover:var(--coral-600);--accent-soft:var(--coral-100);
+--line:var(--warm-200);--line-strong:var(--warm-300);--line-inverse:rgba(255,251,247,.14);
+--focus:var(--ink-900);--focus-inverse:var(--gold-300);
+--success:#2F6B47;--success-soft:var(--sage-100);--error:#A8332A;--error-soft:#FBE4E1;
+/* Life stages */
+--seeking-fg:var(--coral-700);--seeking-bg:var(--coral-100);--seeking-dot:var(--coral-500);
+--dating-fg:var(--plum-700);--dating-bg:var(--plum-100);--dating-dot:#8C6A9B;
+--engaged-fg:var(--gold-700);--engaged-bg:var(--gold-100);--engaged-dot:#C99A45;
+--starting-fg:var(--sage-700);--starting-bg:var(--sage-100);--starting-dot:#6F9A7B;
+/* Type */
+/* Refined Contemporary — Gloock (Noe Display-style, OFL) + Hanken Grotesk (Graphik-style, OFL). Swap for licensed Noe Display / Graphik when available. */
+--font-display:"Gloock","Noe Display",Georgia,serif;
+--font-ui:"Hanken Grotesk","Graphik","Neue Haas Grotesk Text",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+--fs-display-xl:clamp(40px,4.8vw,74px);--fs-display-l:clamp(36px,4vw,60px);--fs-h1:clamp(32px,3.2vw,48px);
+--fs-h2:clamp(26px,2.4vw,34px);--fs-h3:24px;--fs-lead:19px;--fs-body:16px;--fs-read:17px;--fs-sm:14px;--fs-xs:12.5px;
+/* Space (4pt) */
+--s-1:4px;--s-2:8px;--s-3:12px;--s-4:16px;--s-5:20px;--s-6:24px;--s-8:32px;--s-10:40px;--s-12:48px;--s-16:64px;--s-20:80px;--s-24:96px;--s-32:128px;
+/* Radius */
+--r-xs:6px;--r-sm:10px;--r-md:14px;--r-lg:22px;--r-xl:30px;--r-full:9999px;
+/* Elevation — used rarely */
+--e-1:0 1px 2px rgba(38,31,43,.06);--e-2:0 18px 40px -18px rgba(38,31,43,.28);
+/* Motion */
+--ease:cubic-bezier(.25,.1,.25,1);--ease-out:cubic-bezier(.2,.7,.2,1);--t-fast:140ms;--t-base:240ms;--t-slow:420ms;
+/* Layout */
+--max:1320px;--gutter:clamp(20px,4vw,56px);--read:640px;
+}
