@@ -39,7 +39,7 @@ i,em{font-style:normal}
 .mono{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;background:var(--accent);color:var(--ink-900);font-family:var(--font-display);letter-spacing:-.03em;line-height:1;border-radius:28%}
 .mono i{font-style:normal;color:var(--warm-50);margin:0 .02em}
 .wordmark{display:flex;flex-direction:column;line-height:1;text-align:left}
-.wordmark small{font-size:11px;font-weight:700;letter-spacing:.02em;color:var(--text-3);margin-bottom:3px}
+.wordmark small{font-size:13.5px;font-weight:700;letter-spacing:.02em;color:var(--ink-900);margin-bottom:3px}
 .wordmark b{font-family:var(--font-display);font-weight:400;font-size:22px;letter-spacing:-.01em}
 .wordmark b i{color:var(--accent)}
 .inverse .wordmark small{color:var(--text-on-inverse-2)}

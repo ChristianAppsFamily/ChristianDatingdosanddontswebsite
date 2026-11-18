@@ -21,6 +21,5 @@ a:not(.btn){color:var(--ink-900)}
 .inverse .wordmark i,.inverse .wordmark b i,.inverse .feat-num{color:var(--coral-500)}
 .mk-nav,.app-top,.sys-nav{background:rgba(255,255,255,.92)}
 .tabbar{background:rgba(255,255,255,.94)}
-.photo-tag{background:rgba(255,255,255,.9)}
 .paywall{background:linear-gradient(180deg,rgba(255,255,255,0) 0,rgba(255,255,255,.92) 220px,#fff 100%)}
 a:not(.btn):hover{color:var(--coral-700)}

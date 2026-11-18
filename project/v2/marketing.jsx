@@ -48,7 +48,6 @@ function Hero({ onNav, post }) {
         </div>
         <div className="hero-media">
           <div className="photo hero-photo">
-            <span className="photo-tag">Illustrative photo</span>
             <LifestylePhoto src="uploads/hero-friends.jpg" alt="Friends laughing together outdoors on a blanket" />
           </div>
           {post && (
@@ -113,7 +112,6 @@ function Features({ posts }) {
           </div>
           <div className="feat-visual">
             <div className="photo feat-photo">
-              <span className="photo-tag">Illustrative photo</span>
               <LifestylePhoto src="uploads/feature-friends.jpg" alt="Two friends embracing in a sunlit field" />
             </div>
             <div className="stage-panel panel-gold">
@@ -185,7 +183,6 @@ function FinalCTA({ onNav }) {
           <button className="btn btn-ink" onClick={() => onNav('signup')}>Start free trial <Icon name="arrow-right" /></button>
         </div>
         <div className="photo cta-photo">
-          <span className="photo-tag">Illustrative photo</span>
           <LifestylePhoto src="uploads/cta-gathering.jpg" alt="Friends sharing tea and laughing together" />
         </div>
       </div>
