@@ -33,9 +33,9 @@ function Hero({ onNav, post }) {
     <section className="hero">
       <div className="wrap hero-grid">
         <div className="rise">
-          <p className="mk-mark">A small, faith-forward community</p>
-          <h1 className="display">You don't have to navigate Christian dating alone.</h1>
-          <p className="hero-sub">A daily word, a weekly question, and a quiet table of believers walking through seeking, dating, engagement, and starting over — together.</p>
+          <p className="mk-mark">A small Christian community</p>
+          <h1 className="display">Real people talking honestly about dating and faith.</h1>
+          <p className="hero-sub">A verse every morning, a question every week, and believers who will pray for you and cheer you on.</p>
           <div className="hero-cta">
             <button className="btn btn-primary" onClick={() => onNav('signup')}>Start free trial <Icon name="arrow-right" /></button>
             <a className="btn btn-text" href="#what-you-get">Learn more</a>
